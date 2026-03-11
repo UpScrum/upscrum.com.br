@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpScrum</title>
+  <meta
+    name="description"
+    content="A UpScrum ajuda empresas a organizarem processos, projetos e entregas com mais clareza e eficiência."
+  />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: rgba(255,255,255,0.06);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --line: rgba(255,255,255,0.12);
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --max: 1120px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(34,197,94,0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(59,130,246,0.18), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 18px;
+      opacity: 0.9;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+    }
+
+    .hero {
+      padding: 88px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      margin-bottom: 18px;
+      color: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 4.2rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #052e16;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+    }
+
+    .hero-card li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .hero-card li:last-child {
+      border-bottom: none;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .contact {
+      padding-bottom: 80px;
+    }
+
+    .contact-box {
+      background: linear-gradient(180deg, rgba(34,197,94,0.16), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 12px auto 22px;
+      max-width: 650px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Up<span>Scrum</span></div>
+      <nav class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="tag">Eficiência, organização e entrega</div>
+          <h1>Transforme processos em resultados com a UpScrum.</h1>
+          <p>
+            Ajudamos empresas a estruturarem projetos, fluxos e operações
+            com mais clareza, agilidade e foco no que realmente importa.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#contato">Fale conosco</a>
+            <a class="btn btn-secondary" href="#servicos">Conheça os serviços</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>O que a UpScrum entrega</h3>
+          <ul>
+            <li>Organização de processos e demandas</li>
+            <li>Melhoria de fluxo de trabalho</li>
+            <li>Acompanhamento de projetos e entregas</li>
+            <li>Mais visibilidade para tomada de decisão</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <h2 class="section-title">Sobre a UpScrum</h2>
+        <p class="section-text">
+          A UpScrum nasce com o objetivo de simplificar a gestão e dar suporte
+          a equipes que precisam de mais direção, organização e consistência
+          no dia a dia.
+        </p>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <h2 class="section-title">Serviços</h2>
+        <p class="section-text">
+          Uma landing page simples pode focar no essencial: o que você faz,
+          para quem faz e como entrar em contato.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Estruturação de Processos</h3>
+            <p>
+              Mapeamento e organização de rotinas para melhorar eficiência
+              e reduzir retrabalho.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Gestão de Projetos</h3>
+            <p>
+              Apoio no acompanhamento de cronogramas, prioridades e entregas
+              com mais clareza.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Melhoria Contínua</h3>
+            <p>
+              Identificação de gargalos e oportunidades para tornar a operação
+              mais fluida e escalável.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2 class="section-title">Vamos conversar?</h2>
+          <p>
+            Se você quer apresentar a UpScrum de forma profissional e objetiva,
+            esta página já é um excelente ponto de partida.
+          </p>
+          <a class="btn btn-primary" href="mailto:contato@upscrum.com.br">
+            contato@upscrum.com.br
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 UpScrum. Todos os direitos reservados.
+    </div>
+  </footer>
+</body>
+</html>
