@@ -3,23 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UpScrum</title>
+  <title>UpScrum | Software livre, IA e transformação digital</title>
   <meta
     name="description"
-    content="A UpScrum ajuda empresas a organizarem processos, projetos e entregas com mais clareza e eficiência."
+    content="A UpScrum ajuda empresas a acelerar sua transformação digital com software livre, inteligência artificial e busca inteligente em documentos."
   />
+  <meta name="theme-color" content="#0b1220" />
+
   <style>
     :root {
-      --bg: #0f172a;
-      --bg-soft: #111827;
-      --card: rgba(255,255,255,0.06);
+      --bg: #0b1220;
+      --bg-soft: #101a2f;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(255, 255, 255, 0.08);
       --text: #f8fafc;
       --muted: #cbd5e1;
-      --line: rgba(255,255,255,0.12);
+      --muted-2: #94a3b8;
+      --line: rgba(255, 255, 255, 0.12);
       --accent: #22c55e;
       --accent-hover: #16a34a;
-      --max: 1120px;
-      --radius: 18px;
+      --accent-soft: rgba(34, 197, 94, 0.14);
+      --max-width: 1140px;
+      --radius: 20px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
     }
 
     * {
@@ -34,102 +40,159 @@
 
     body {
       font-family: Inter, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(34,197,94,0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(59,130,246,0.18), transparent 28%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 25%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.14), transparent 28%),
+        linear-gradient(180deg, #08111f 0%, #0b1220 35%, #101a2f 100%);
       line-height: 1.6;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .container {
-      width: min(100% - 32px, var(--max));
+      width: min(100% - 32px, var(--max-width));
       margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1.04rem;
     }
 
     header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(15, 23, 42, 0.7);
-      border-bottom: 1px solid var(--line);
-      z-index: 10;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 17, 31, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .nav {
+      min-height: 74px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 0;
+      gap: 20px;
     }
 
-    .brand {
-      font-size: 1.2rem;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-weight: 800;
-      letter-spacing: 0.3px;
+      font-size: 1.15rem;
+      letter-spacing: 0.2px;
     }
 
-    .brand span {
+    .logo-mark {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent), #60a5fa);
+      box-shadow: 0 0 24px rgba(34, 197, 94, 0.45);
+    }
+
+    .logo span {
       color: var(--accent);
     }
 
-    .nav a {
-      color: var(--text);
-      text-decoration: none;
-      margin-left: 18px;
-      opacity: 0.9;
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
     }
 
-    .nav a:hover {
-      opacity: 1;
+    .nav-links a {
+      color: var(--muted);
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 11px 16px;
+      background: var(--accent);
+      color: #052e16;
+      font-weight: 700;
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
     }
 
     .hero {
-      padding: 88px 0 56px;
+      padding: 88px 0 64px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 28px;
       align-items: center;
     }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.85rem;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      margin-bottom: 18px;
-      color: var(--muted);
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 4vw, 4.2rem);
-      line-height: 1.08;
-      margin-bottom: 18px;
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 1.02;
+      margin-bottom: 20px;
+      max-width: 780px;
     }
 
     .hero p {
-      font-size: 1.08rem;
       color: var(--muted);
-      max-width: 640px;
-      margin-bottom: 28px;
+      font-size: 1.08rem;
+      max-width: 690px;
+      margin-bottom: 30px;
     }
 
-    .cta-group {
+    .hero-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      margin-bottom: 26px;
     }
 
     .btn {
-      display: inline-block;
-      padding: 14px 22px;
-      border-radius: 12px;
-      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 14px;
       font-weight: 700;
       transition: 0.2s ease;
     }
@@ -145,73 +208,138 @@
     }
 
     .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--line);
       color: var(--text);
-      background: rgba(255,255,255,0.04);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.07);
     }
 
-    .hero-card {
-      background: var(--card);
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-tag {
+      padding: 9px 12px;
+      border-radius: 999px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.22);
-    }
-
-    .hero-card h3 {
-      margin-bottom: 14px;
-      font-size: 1.2rem;
-    }
-
-    .hero-card ul {
-      list-style: none;
-    }
-
-    .hero-card li {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--muted);
+      font-size: 0.92rem;
     }
 
-    .hero-card li:last-child {
-      border-bottom: none;
+    .hero-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
 
-    section {
-      padding: 42px 0;
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: auto -50px -50px auto;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(34,197,94,0.18), transparent 70%);
+      border-radius: 50%;
     }
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 10px;
+    .panel-title {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
     }
 
-    .section-text {
+    .panel-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .panel-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .panel-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .panel-item p {
       color: var(--muted);
-      max-width: 700px;
-      margin-bottom: 24px;
+      font-size: 0.95rem;
+      margin: 0;
     }
 
-    .cards {
+    .stats {
+      padding-top: 10px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat {
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .services-grid,
+    .benefits-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
+      margin-top: 32px;
     }
 
     .card {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-size: 1.2rem;
     }
 
     .card h3 {
+      font-size: 1.1rem;
       margin-bottom: 10px;
-      font-size: 1.05rem;
     }
 
     .card p {
@@ -219,43 +347,158 @@
       font-size: 0.97rem;
     }
 
-    .contact {
-      padding-bottom: 80px;
+    .highlight {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
     }
 
-    .contact-box {
-      background: linear-gradient(180deg, rgba(34,197,94,0.16), rgba(255,255,255,0.04));
+    .highlight-box {
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 32px;
-      text-align: center;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
     }
 
-    .contact-box p {
+    .highlight-box ul {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .highlight-box li {
+      padding-left: 18px;
+      position: relative;
       color: var(--muted);
-      margin: 12px auto 22px;
-      max-width: 650px;
     }
 
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 24px 0 40px;
+    .highlight-box li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .step p {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    @media (max-width: 900px) {
+    .cta-section {
+      padding-bottom: 96px;
+    }
+
+    .cta-box {
+      background:
+        radial-gradient(circle at top right, rgba(34,197,94,0.16), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 42px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box p {
+      max-width: 760px;
+      margin: 14px auto 28px;
+      color: var(--muted);
+    }
+
+    .contact-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    .contact-inline a {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 28px 0 40px;
+      color: var(--muted-2);
+      font-size: 0.95rem;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
       .hero-grid,
-      .cards {
+      .highlight,
+      .services-grid,
+      .benefits-grid,
+      .process,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
+    }
 
+    @media (max-width: 820px) {
       .nav-links {
         display: none;
       }
 
       .hero {
-        padding-top: 64px;
+        padding-top: 72px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
       }
     }
   </style>
@@ -263,11 +506,16 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">Up<span>Scrum</span></div>
+      <a href="#" class="logo">
+        <div class="logo-mark"></div>
+        <div>Up<span>Scrum</span></div>
+      </a>
+
       <nav class="nav-links">
-        <a href="#sobre">Sobre</a>
         <a href="#servicos">Serviços</a>
-        <a href="#contato">Contato</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#contato" class="nav-cta">Contato</a>
       </nav>
     </div>
   </header>
@@ -276,94 +524,275 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="tag">Eficiência, organização e entrega</div>
-          <h1>Transforme processos em resultados com a UpScrum.</h1>
+          <div class="eyebrow">Tecnologia aberta • IA aplicada • Soluções corporativas</div>
+
+          <h1>
+            Transformação digital com software livre, inteligência artificial e busca inteligente em documentos.
+          </h1>
+
           <p>
-            Ajudamos empresas a estruturarem projetos, fluxos e operações
-            com mais clareza, agilidade e foco no que realmente importa.
+            A UpScrum ajuda empresas e instituições a modernizar processos, implantar plataformas colaborativas,
+            estruturar soluções com IA e encontrar informação valiosa dentro de grandes bases documentais.
           </p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="#contato">Fale conosco</a>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:contato@upscrum.com.br">Fale com a UpScrum</a>
             <a class="btn btn-secondary" href="#servicos">Conheça os serviços</a>
+          </div>
+
+          <div class="hero-tags">
+            <span class="hero-tag">Software livre</span>
+            <span class="hero-tag">IA para negócios</span>
+            <span class="hero-tag">Busca documental inteligente</span>
+            <span class="hero-tag">Automação e produtividade</span>
           </div>
         </div>
 
-        <aside class="hero-card">
-          <h3>O que a UpScrum entrega</h3>
-          <ul>
-            <li>Organização de processos e demandas</li>
-            <li>Melhoria de fluxo de trabalho</li>
-            <li>Acompanhamento de projetos e entregas</li>
-            <li>Mais visibilidade para tomada de decisão</li>
-          </ul>
+        <aside class="hero-panel">
+          <h2 class="panel-title">Como ajudamos sua organização</h2>
+
+          <div class="panel-list">
+            <div class="panel-item">
+              <strong>Modernização de processos</strong>
+              <p>Redesenhamos fluxos e apoiamos a adoção de tecnologia para reduzir retrabalho e aumentar eficiência.</p>
+            </div>
+
+            <div class="panel-item">
+              <strong>Busca inteligente em documentos</strong>
+              <p>Facilitamos o acesso à informação com IA aplicada a bases documentais, normativas, técnicas e institucionais.</p>
+            </div>
+
+            <div class="panel-item">
+              <strong>Plataformas abertas e sustentáveis</strong>
+              <p>Implantamos soluções baseadas em software livre para colaboração, gestão e evolução tecnológica contínua.</p>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
 
-    <section id="sobre">
+    <section class="stats">
       <div class="container">
-        <h2 class="section-title">Sobre a UpScrum</h2>
-        <p class="section-text">
-          A UpScrum nasce com o objetivo de simplificar a gestão e dar suporte
-          a equipes que precisam de mais direção, organização e consistência
-          no dia a dia.
-        </p>
-      </div>
-    </section>
-
-    <section id="servicos">
-      <div class="container">
-        <h2 class="section-title">Serviços</h2>
-        <p class="section-text">
-          Uma landing page simples pode focar no essencial: o que você faz,
-          para quem faz e como entrar em contato.
-        </p>
-
-        <div class="cards">
-          <div class="card">
-            <h3>Estruturação de Processos</h3>
-            <p>
-              Mapeamento e organização de rotinas para melhorar eficiência
-              e reduzir retrabalho.
-            </p>
+        <div class="stats-grid">
+          <div class="stat">
+            <strong>IA aplicada</strong>
+            <span>Para busca, análise de informação e apoio à decisão.</span>
           </div>
-          <div class="card">
-            <h3>Gestão de Projetos</h3>
-            <p>
-              Apoio no acompanhamento de cronogramas, prioridades e entregas
-              com mais clareza.
-            </p>
+          <div class="stat">
+            <strong>Software livre</strong>
+            <span>Mais autonomia, flexibilidade e controle sobre a solução.</span>
           </div>
-          <div class="card">
-            <h3>Melhoria Contínua</h3>
-            <p>
-              Identificação de gargalos e oportunidades para tornar a operação
-              mais fluida e escalável.
-            </p>
+          <div class="stat">
+            <strong>Foco em resultado</strong>
+            <span>Projetos alinhados às necessidades reais do negócio.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contato" class="contact">
+    <section id="servicos" class="section">
       <div class="container">
-        <div class="contact-box">
-          <h2 class="section-title">Vamos conversar?</h2>
-          <p>
-            Se você quer apresentar a UpScrum de forma profissional e objetiva,
-            esta página já é um excelente ponto de partida.
+        <div class="eyebrow">Serviços</div>
+        <h2 class="section-title">Soluções tecnológicas para transformar operação, informação e colaboração.</h2>
+        <p class="section-subtitle">
+          Atuamos na implantação, adaptação e evolução de soluções digitais com foco em produtividade,
+          governança da informação, eficiência operacional e uso estratégico da inteligência artificial.
+        </p>
+
+        <div class="services-grid">
+          <article class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Transformação digital</h3>
+            <p>
+              Apoiamos a modernização de processos, ferramentas e rotinas para tornar a operação mais organizada,
+              integrada e eficiente.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🤖</div>
+            <h3>Inteligência artificial aplicada</h3>
+            <p>
+              Implementamos soluções com IA para automatizar tarefas, estruturar conhecimento e apoiar decisões
+              com mais agilidade.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📄</div>
+            <h3>Busca inteligente em documentos</h3>
+            <p>
+              Criamos experiências de busca capazes de localizar respostas e conteúdos relevantes em bases
+              documentais extensas.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">💬</div>
+            <h3>Plataformas colaborativas</h3>
+            <p>
+              Implantamos ambientes de comunicação e gestão que fortalecem a colaboração entre equipes
+              e a transparência do trabalho.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">☁️</div>
+            <h3>Infraestrutura moderna</h3>
+            <p>
+              Estruturamos ambientes confiáveis, escaláveis e aderentes à realidade da organização,
+              com foco em sustentabilidade tecnológica.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🧭</div>
+            <h3>Consultoria tecnológica</h3>
+            <p>
+              Ajudamos sua empresa a escolher a arquitetura, as ferramentas e o caminho de adoção mais adequado
+              para cada contexto.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="diferenciais" class="section">
+      <div class="container highlight">
+        <div class="highlight-box">
+          <div class="eyebrow">Diferenciais</div>
+          <h2 class="section-title">Tecnologia útil, aberta e conectada ao negócio.</h2>
+          <p class="section-subtitle">
+            Nossa abordagem combina visão prática de implantação com foco em eficiência, autonomia tecnológica
+            e geração de valor real.
           </p>
+
+          <ul>
+            <li>Soluções baseadas em software livre e tecnologias abertas</li>
+            <li>Uso estratégico de IA para produtividade e acesso à informação</li>
+            <li>Implantações alinhadas ao contexto e à maturidade da organização</li>
+            <li>Projetos com foco em clareza operacional, escalabilidade e sustentabilidade</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <div class="eyebrow">Para quem é</div>
+          <h2 class="section-title">Ideal para organizações que querem evoluir sua estrutura digital.</h2>
+          <p class="section-subtitle">
+            A UpScrum atende empresas e instituições que precisam modernizar fluxos, organizar conhecimento,
+            melhorar colaboração e usar IA de forma prática.
+          </p>
+
+          <ul>
+            <li>Empresas com muitos documentos, normas, contratos ou acervos técnicos</li>
+            <li>Equipes que precisam melhorar comunicação, gestão e acompanhamento</li>
+            <li>Organizações em processo de transformação digital</li>
+            <li>Instituições que buscam alternativas tecnológicas mais abertas e flexíveis</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="eyebrow">Benefícios</div>
+        <h2 class="section-title">O que sua organização ganha com a UpScrum</h2>
+        <p class="section-subtitle">
+          Mais do que implantar tecnologia, nosso objetivo é tornar a informação mais acessível,
+          o trabalho mais fluido e a tomada de decisão mais inteligente.
+        </p>
+
+        <div class="benefits-grid">
+          <article class="card">
+            <div class="card-icon">⏱️</div>
+            <h3>Mais produtividade</h3>
+            <p>Redução do tempo gasto com tarefas repetitivas, busca manual de informação e retrabalho operacional.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🔎</div>
+            <h3>Mais acesso ao conhecimento</h3>
+            <p>Informações dispersas passam a ser localizadas com mais facilidade e contexto.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">📈</div>
+            <h3>Mais capacidade de evolução</h3>
+            <p>Estrutura tecnológica preparada para crescer com a organização e acompanhar novas demandas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section">
+      <div class="container">
+        <div class="eyebrow">Como funciona</div>
+        <h2 class="section-title">Uma jornada simples para transformar tecnologia em resultado.</h2>
+        <p class="section-subtitle">
+          Conduzimos o projeto de forma objetiva, entendendo o cenário atual, propondo a solução adequada
+          e apoiando a implantação com foco em adoção e valor.
+        </p>
+
+        <div class="process">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Diagnóstico</h3>
+            <p>Analisamos desafios, processos, fluxos de informação e necessidades da organização.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Desenho da solução</h3>
+            <p>Definimos a abordagem tecnológica, a arquitetura e os objetivos práticos da implantação.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Implantação</h3>
+            <p>Configuramos, adaptamos e integramos a solução com foco em eficiência e estabilidade.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Evolução contínua</h3>
+            <p>Apoiamos a melhoria contínua para que a tecnologia acompanhe o crescimento do negócio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">Contato</div>
+          <h2 class="section-title">Vamos conversar sobre a transformação digital da sua organização?</h2>
+          <p>
+            Se você busca uma solução baseada em software livre, inteligência artificial e organização inteligente
+            da informação, a UpScrum pode ajudar a estruturar esse caminho.
+          </p>
+
           <a class="btn btn-primary" href="mailto:contato@upscrum.com.br">
             contato@upscrum.com.br
           </a>
+
+          <div class="contact-inline">
+            <span>UpScrum</span>
+            <span>•</span>
+            <span>Software livre</span>
+            <span>•</span>
+            <span>IA</span>
+            <span>•</span>
+            <span>Busca documental inteligente</span>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      © 2026 UpScrum. Todos os direitos reservados.
+    <div class="container footer-row">
+      <div>© 2026 UpScrum. Todos os direitos reservados.</div>
+      <div>upscrum.com.br</div>
     </div>
   </footer>
 </body>
