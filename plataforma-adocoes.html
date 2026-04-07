@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpScrum | Gestão de Adoções de Pets</title>
+  <meta
+    name="description"
+    content="Plataforma para gestão de adoções de pets com cadastro de organizações, pets, adotantes, registro de adoções e portal público de adoção."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f9f4ea;
+      --bg-soft: #f4ead8;
+      --ink: #1c2a3a;
+      --muted: #5b6775;
+      --line: rgba(28, 42, 58, 0.2);
+      --card: rgba(255, 255, 255, 0.78);
+      --accent: #d8572a;
+      --accent-dark: #b13e17;
+      --highlight: #0f766e;
+      --shadow: 0 16px 45px rgba(28, 42, 58, 0.14);
+      --max: 1120px;
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Manrope, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(216, 87, 42, 0.2), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(15, 118, 110, 0.15), transparent 30%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 55%, #efe3cc 100%);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(249, 244, 234, 0.8);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 1.24rem;
+      font-weight: 800;
+      letter-spacing: 0.25px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      margin-left: 18px;
+      opacity: 0.85;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+    }
+
+    .hero {
+      padding: 92px 0 62px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      border: 1px solid rgba(216, 87, 42, 0.35);
+      border-radius: 999px;
+      background: rgba(216, 87, 42, 0.08);
+      margin-bottom: 18px;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: clamp(2.1rem, 4vw, 4.1rem);
+      line-height: 1.06;
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff7f2;
+      box-shadow: 0 10px 24px rgba(216, 87, 42, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.75);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40% auto auto -20%;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.12);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 14px;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 1.22rem;
+      position: relative;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      position: relative;
+    }
+
+    .hero-card li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .hero-card li:last-child {
+      border-bottom: none;
+    }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-title {
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transform: translateY(0);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-family: Archivo, "Segoe UI", sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      counter-reset: etapas;
+    }
+
+    .flow-step {
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px dashed rgba(28, 42, 58, 0.25);
+      border-radius: 16px;
+      padding: 18px;
+      position: relative;
+      box-shadow: 0 10px 26px rgba(28, 42, 58, 0.09);
+    }
+
+    .flow-step::before {
+      counter-increment: etapas;
+      content: "Etapa " counter(etapas);
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--highlight);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .flow-step h3 {
+      font-family: Archivo, "Segoe UI", sans-serif;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .portal {
+      padding-bottom: 12px;
+    }
+
+    .pets {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .pet {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(28, 42, 58, 0.2);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .pet-cover {
+      height: 170px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.92);
+      font-family: Archivo, "Segoe UI", sans-serif;
+    }
+
+    .pet-cover.one {
+      background: linear-gradient(130deg, #0f766e, #1d9a91);
+    }
+
+    .pet-cover.two {
+      background: linear-gradient(130deg, #d8572a, #ef7e56);
+    }
+
+    .pet-cover.three {
+      background: linear-gradient(130deg, #24619e, #3f85cb);
+    }
+
+    .pet-body {
+      padding: 16px;
+    }
+
+    .pet-body h3 {
+      font-family: Archivo, "Segoe UI", sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .pet-body p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact {
+      padding-bottom: 80px;
+    }
+
+    .contact-box {
+      background: linear-gradient(160deg, rgba(15, 118, 110, 0.22), rgba(255, 255, 255, 0.65));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 12px auto 22px;
+      max-width: 650px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 0.8s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.08s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.16s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.24s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.32s;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .flow,
+      .pets,
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards,
+      .flow,
+      .pets {
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .cards,
+      .flow,
+      .pets {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+
+      .contact-box {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Up<span>Scrum</span></div>
+      <nav class="nav-links">
+        <a href="#sobre">Plataforma</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#portal">Portal de Adoção</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="tag">Gestão pública e social com impacto real</div>
+          <h1>Plataforma para gestão de adoções de pets do cadastro ao novo lar.</h1>
+          <p>
+            A UpScrum organiza todo o processo de adoção para organizações governamentais
+            e não governamentais, com rastreabilidade, transparência e portal público
+            de pets disponíveis para adoção.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+            <a class="btn btn-secondary" href="#recursos">Ver recursos</a>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal delay-1">
+          <h3>Visão operacional em um só painel</h3>
+          <ul>
+            <li>Cadastro de organizações com equipes e unidades</li>
+            <li>Cadastro completo de PETs com histórico e status</li>
+            <li>Cadastro de adotantes e documentação centralizada</li>
+            <li>Registro de adoções com linha do tempo auditável</li>
+            <li>Portal de adoção com pets disponíveis em tempo real</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <h2 class="section-title reveal">Sistematize e humanize o processo de adoção</h2>
+        <p class="section-text">
+          A solução foi pensada para instituições que precisam padronizar fluxos,
+          reduzir retrabalho e ampliar a confiança da sociedade em programas de adoção.
+          Com processos claros, cada adoção vira um caso acompanhado com segurança.
+        </p>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <div class="container">
+        <h2 class="section-title">Recursos da plataforma</h2>
+        <p class="section-text">
+          Módulos integrados para governança do processo de adoção e para facilitar
+          o trabalho de equipes técnicas, atendimento e gestores.
+        </p>
+
+        <div class="cards">
+          <div class="card reveal delay-1">
+            <h3>Cadastro de Organizações</h3>
+            <p>
+              Estruture dados de órgãos públicos, ONGs e unidades operacionais
+              com permissões e responsabilidades por equipe.
+            </p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>Cadastro de PETs</h3>
+            <p>
+              Registre informações de saúde, comportamento, porte, vacinação,
+              fotos e disponibilidade para adoção.
+            </p>
+          </div>
+          <div class="card reveal delay-3">
+            <h3>Cadastro de Adotantes</h3>
+            <p>
+              Centralize dados, documentos e histórico de contatos para facilitar
+              análise de perfil e acompanhamento pós-adoção.
+            </p>
+          </div>
+          <div class="card reveal delay-4">
+            <h3>Registro de Adoções</h3>
+            <p>
+              Formalize cada etapa com data, responsável, observações e anexos,
+              garantindo rastreabilidade e transparência institucional.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Fluxo operacional de adoção</h2>
+        <p class="section-text">
+          Um processo claro para reduzir inconsistências e acelerar decisões,
+          mantendo o bem-estar animal e a segurança jurídica como prioridade.
+        </p>
+
+        <div class="flow">
+          <article class="flow-step reveal delay-1">
+            <h3>Triagem e cadastro</h3>
+            <p>Registro do PET e validação inicial de dados da organização.</p>
+          </article>
+          <article class="flow-step reveal delay-2">
+            <h3>Publicação no portal</h3>
+            <p>Exibição dos pets aptos para adoção com filtros por perfil.</p>
+          </article>
+          <article class="flow-step reveal delay-3">
+            <h3>Análise de adotante</h3>
+            <p>Avaliação de cadastro, documentos e aderência ao perfil do PET.</p>
+          </article>
+          <article class="flow-step reveal delay-4">
+            <h3>Registro e acompanhamento</h3>
+            <p>Formalização da adoção e monitoramento pós-adoção em histórico único.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="portal" class="portal">
+      <div class="container">
+        <h2 class="section-title">Portal de adoção com pets disponíveis</h2>
+        <p class="section-text">
+          Vitrine pública para aproximar adotantes e organizações, com atualização
+          automática conforme o status de cada PET no sistema.
+        </p>
+
+        <div class="pets">
+          <article class="pet reveal delay-1">
+            <div class="pet-cover one">Nina</div>
+            <div class="pet-body">
+              <h3>Fêmea • 2 anos • Porte pequeno</h3>
+              <p>Vacinada, dócil e sociável. Disponível para adoção responsável.</p>
+            </div>
+          </article>
+          <article class="pet reveal delay-2">
+            <div class="pet-cover two">Thor</div>
+            <div class="pet-body">
+              <h3>Macho • 4 anos • Porte médio</h3>
+              <p>Castrado e com acompanhamento veterinário em dia.</p>
+            </div>
+          </article>
+          <article class="pet reveal delay-3">
+            <div class="pet-cover three">Luna</div>
+            <div class="pet-body">
+              <h3>Fêmea • 1 ano • Porte médio</h3>
+              <p>Cheia de energia e ideal para famílias com espaço e rotina ativa.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contact">
+      <div class="container">
+        <div class="contact-box reveal">
+          <h2 class="section-title">Pronto para digitalizar o programa de adoção?</h2>
+          <p>
+            Leve padronização, transparência e agilidade para sua operação.
+            Fale com a UpScrum e conheça uma implantação orientada para equipes
+            governamentais e não governamentais.
+          </p>
+          <a class="btn btn-primary" href="mailto:contato@upscrum.com.br">
+            contato@upscrum.com.br
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 UpScrum. Plataforma de gestão de adoções de pets.
+    </div>
+  </footer>
+</body>
+</html>
