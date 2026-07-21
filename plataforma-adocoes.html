@@ -363,6 +363,92 @@
       max-width: 650px;
     }
 
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .form-field label {
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      font: inherit;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(15, 118, 110, 0.7);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+    }
+
+    .form-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .btn-submit:disabled {
+      cursor: wait;
+      opacity: 0.8;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .form-status {
+      display: none;
+      border: 1px solid #99f6e4;
+      border-radius: 12px;
+      background: #ccfbf1;
+      color: #115e59;
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .form-status.show {
+      display: block;
+    }
+
+    .form-status.error {
+      border-color: #fecaca;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -439,6 +525,10 @@
 
       .contact-box {
         padding: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -610,9 +700,30 @@
             Fale com a UpScrum e conheça uma implantação orientada para equipes
             governamentais e não governamentais.
           </p>
-          <a class="btn btn-primary" href="mailto:contato@upscrum.com.br">
-            contato@upscrum.com.br
-          </a>
+          <form class="contact-form" data-contact-form>
+            <input type="hidden" name="subject" value="Plataforma de Gerenciamento de Adoções" />
+            <div class="form-row">
+              <div class="form-field">
+                <label for="adocoes-contact-name">Nome</label>
+                <input id="adocoes-contact-name" type="text" name="name" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="adocoes-contact-email">E-mail</label>
+                <input id="adocoes-contact-email" type="email" name="email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="adocoes-contact-whatsapp">WhatsApp</label>
+              <input id="adocoes-contact-whatsapp" type="tel" name="whatsapp" autocomplete="tel" />
+            </div>
+            <div class="form-field">
+              <label for="adocoes-contact-message">Mensagem</label>
+              <textarea id="adocoes-contact-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-primary btn-submit" type="submit">Solicitar demonstração</button>
+            <p class="form-note">Resposta pelo e-mail contato@upscrum.com.br.</p>
+            <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
@@ -623,5 +734,6 @@
       © 2026 UpScrum. Plataforma de gestão de adoções de pets.
     </div>
   </footer>
+  <script src="contact.js"></script>
 </body>
 </html>

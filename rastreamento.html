@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rastreamento de Veículos e Ativos | UpScrum</title>
+  <meta
+    name="description"
+    content="Monitore veículos, dispositivos e ativos com localização em tempo real, históricos, alertas, cercas geográficas e relatórios personalizados."
+  />
+  <link rel="canonical" href="https://upscrum.com.br/rastreamento.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://upscrum.com.br/rastreamento.html" />
+  <meta property="og:title" content="Plataforma de Rastreamento | UpScrum" />
+  <meta
+    property="og:description"
+    content="Mais visibilidade e controle sobre veículos, dispositivos e ativos em uma plataforma configurada para a sua operação."
+  />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Plataforma de Rastreamento | UpScrum" />
+  <meta
+    name="twitter:description"
+    content="Mais visibilidade e controle sobre veículos, dispositivos e ativos em uma plataforma configurada para a sua operação."
+  />
+  <meta name="product-name" content="UpScrum Tracking" />
+  <style>
+    :root {
+      --bg: #f7faf9;
+      --bg-soft: #eef6f4;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --line: rgba(23, 32, 51, 0.14);
+      --card: rgba(255, 255, 255, 0.86);
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --signal: #2563eb;
+      --warning: #c2410c;
+      --shadow: 0 16px 44px rgba(23, 32, 51, 0.12);
+      --max: 1120px;
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(15, 118, 110, 0.14), transparent 28%),
+        radial-gradient(circle at 86% 10%, rgba(37, 99, 235, 0.12), transparent 30%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 56%, #f3f7fb 100%);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, 0.45);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 250, 249, 0.84);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.82;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-links .nav-cta {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 15px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #f8fffd;
+      opacity: 1;
+    }
+
+    .hero {
+      padding: 82px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+      border: 1px solid rgba(15, 118, 110, 0.32);
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      margin-bottom: 18px;
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.14;
+    }
+
+    h1 {
+      font-size: clamp(2.15rem, 4vw, 4.05rem);
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    .product-name {
+      display: block;
+      color: var(--accent-dark);
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin-bottom: 28px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #f8fffd;
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+    }
+
+    .tracking-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .panel-status {
+      color: var(--accent-dark);
+    }
+
+    .map-card {
+      position: relative;
+      min-height: 300px;
+      border: 1px solid rgba(23, 32, 51, 0.12);
+      border-radius: 16px;
+      background:
+        linear-gradient(90deg, rgba(23, 32, 51, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(23, 32, 51, 0.05) 1px, transparent 1px),
+        linear-gradient(135deg, #e8f5ef 0%, #eef6ff 100%);
+      background-size: 38px 38px, 38px 38px, auto;
+      overflow: hidden;
+    }
+
+    .route {
+      position: absolute;
+      inset: 24px;
+    }
+
+    .route path {
+      fill: none;
+      stroke: var(--signal);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 12 10;
+    }
+
+    .marker {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 4px solid #fff;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 8px 18px rgba(23, 32, 51, 0.22);
+    }
+
+    .marker.one {
+      left: 18%;
+      top: 62%;
+    }
+
+    .marker.two {
+      left: 49%;
+      top: 40%;
+      background: var(--signal);
+    }
+
+    .marker.three {
+      left: 76%;
+      top: 28%;
+      background: var(--warning);
+    }
+
+    .asset-card,
+    .alert-card,
+    .summary-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(23, 32, 51, 0.12);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 12px 28px rgba(23, 32, 51, 0.12);
+    }
+
+    .asset-card {
+      left: 18px;
+      top: 18px;
+      width: 178px;
+    }
+
+    .alert-card {
+      right: 18px;
+      bottom: 18px;
+      width: 192px;
+    }
+
+    .summary-card {
+      right: 18px;
+      top: 18px;
+      width: 138px;
+    }
+
+    .mini-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .mini-value {
+      display: block;
+      color: var(--ink);
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mini-grid div {
+      border-radius: 10px;
+      background: rgba(15, 118, 110, 0.08);
+      padding: 8px;
+    }
+
+    .alert-card {
+      border-color: rgba(194, 65, 12, 0.22);
+    }
+
+    .alert-card .mini-value {
+      color: var(--warning);
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.65rem, 2.4vw, 2.25rem);
+      margin-bottom: 10px;
+      text-wrap: balance;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .cards.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      border: 1px solid rgba(15, 118, 110, 0.18);
+      border-radius: 12px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--accent);
+    }
+
+    .card-icon svg {
+      width: 23px;
+      height: 23px;
+      stroke: currentColor;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .card p,
+    .card li,
+    .flow-step p,
+    .faq-answer {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 16px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .flow-step {
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px dashed rgba(23, 32, 51, 0.2);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 10px 26px rgba(23, 32, 51, 0.08);
+    }
+
+    .flow-number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .flow-step h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .check-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      padding: 14px 14px 14px 42px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      box-shadow: 0 8px 20px rgba(23, 32, 51, 0.07);
+    }
+
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(23, 32, 51, 0.08);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 16px 18px;
+      text-align: left;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .faq-question::after {
+      content: "+";
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--accent);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .faq-question[aria-expanded="true"]::after {
+      content: "-";
+    }
+
+    .faq-answer {
+      padding: 0 18px 18px;
+    }
+
+    .faq-answer[hidden] {
+      display: none;
+    }
+
+    .contact {
+      padding-bottom: 82px;
+    }
+
+    .contact-box {
+      background: linear-gradient(160deg, rgba(15, 118, 110, 0.17), rgba(255, 255, 255, 0.72));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin: 12px auto 22px;
+      max-width: 670px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .form-field label {
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      font: inherit;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: rgba(15, 118, 110, 0.7);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+    }
+
+    .form-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .btn-submit:disabled {
+      cursor: wait;
+      opacity: 0.8;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .form-status {
+      display: none;
+      border: 1px solid #99f6e4;
+      border-radius: 12px;
+      background: #ccfbf1;
+      color: #115e59;
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .form-status.show {
+      display: block;
+    }
+
+    .form-status.error {
+      border-color: #fecaca;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .btn,
+      .card {
+        transition: none;
+      }
+    }
+
+    @media (max-width: 1020px) {
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .cards,
+      .cards.three,
+      .flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .cards,
+      .cards.three,
+      .flow,
+      .check-list {
+        grid-template-columns: 1fr;
+      }
+
+      .tracking-panel {
+        padding: 12px;
+      }
+
+      .map-card {
+        min-height: 270px;
+      }
+
+      .summary-card {
+        display: none;
+      }
+
+      .asset-card,
+      .alert-card {
+        width: min(178px, calc(100% - 32px));
+      }
+
+      .alert-card {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .contact-box {
+        padding: 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .nav-links {
+        gap: 10px;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      .nav-links .nav-cta {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cta-group .btn {
+        width: 100%;
+      }
+
+      .map-card {
+        min-height: 245px;
+      }
+
+      .asset-card {
+        left: 12px;
+        top: 12px;
+      }
+
+      .alert-card {
+        width: calc(100% - 24px);
+        left: 12px;
+        right: auto;
+      }
+
+      .route {
+        inset: 48px 12px 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PRODUCT_NAME centralizado para uso pelo script: UpScrum Tracking -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">Up<span>Scrum</span></a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#plataforma">Plataforma</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#aplicacoes">Aplicações</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#contato" class="nav-cta">Solicitar demonstração</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="plataforma">
+      <div class="container hero-grid">
+        <div>
+          <span class="product-name" data-product-name>UpScrum Tracking</span>
+          <div class="tag">Controle operacional e visibilidade em tempo real</div>
+          <h1>Acompanhe veículos, dispositivos e ativos em um único ambiente.</h1>
+          <p>
+            A UpScrum oferece uma plataforma de rastreamento configurada conforme a sua operação,
+            permitindo acompanhar localizações, trajetos, eventos e indicadores com mais segurança
+            e clareza.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+            <a class="btn btn-secondary" href="#recursos">Conhecer recursos</a>
+          </div>
+        </div>
+
+        <aside class="tracking-panel" aria-label="Ilustração conceitual de painel de rastreamento">
+          <div class="panel-top">
+            <span>Painel operacional</span>
+            <span class="panel-status">12 online · 3 offline</span>
+          </div>
+          <div class="map-card" role="img" aria-label="Mapa estilizado com rota, marcadores e resumo de ativos monitorados">
+            <svg class="route" viewBox="0 0 420 250" aria-hidden="true">
+              <path d="M30 190 C95 150 110 210 170 150 S250 70 315 92 S355 120 390 44" />
+            </svg>
+            <span class="marker one" aria-hidden="true"></span>
+            <span class="marker two" aria-hidden="true"></span>
+            <span class="marker three" aria-hidden="true"></span>
+            <div class="asset-card">
+              <span class="mini-label">Veículo A-204</span>
+              <span class="mini-value">48 km/h</span>
+              <div class="mini-grid">
+                <div>
+                  <span class="mini-label">Status</span>
+                  <span class="mini-value">Ativo</span>
+                </div>
+                <div>
+                  <span class="mini-label">Atualizado</span>
+                  <span class="mini-value">09:42</span>
+                </div>
+              </div>
+            </div>
+            <div class="summary-card">
+              <span class="mini-label">Ativos</span>
+              <span class="mini-value">15 cadastrados</span>
+              <span class="mini-label">Rotas hoje</span>
+              <span class="mini-value">38</span>
+            </div>
+            <div class="alert-card">
+              <span class="mini-label">Alerta configurado</span>
+              <span class="mini-value">Entrada em área definida</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Mais controle sobre o que está em movimento</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+                <path d="M8 4v16M16 4v16" />
+              </svg>
+            </div>
+            <h3>Visibilidade operacional</h3>
+            <p>Acompanhe a localização e o status dos ativos cadastrados em um ambiente centralizado.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-5" />
+              </svg>
+            </div>
+            <h3>Mais segurança</h3>
+            <p>Receba informações importantes sobre movimentações, ocorrências e situações configuradas para monitoramento.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 3-6.7" />
+                <path d="M3 3v6h6" />
+                <path d="M12 7v5l3 2" />
+              </svg>
+            </div>
+            <h3>Histórico e rastreabilidade</h3>
+            <p>Consulte trajetos, períodos, paradas e eventos registrados pela plataforma.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19V5" />
+                <path d="M4 19h16" />
+                <path d="M8 16v-5" />
+                <path d="M12 16V8" />
+                <path d="M16 16v-3" />
+              </svg>
+            </div>
+            <h3>Decisões baseadas em dados</h3>
+            <p>Utilize relatórios e indicadores para compreender melhor a operação e identificar oportunidades de melhoria.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <div class="container">
+        <h2 class="section-title">Recursos para diferentes operações de rastreamento</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Rastreamento em tempo real</h3>
+            <p>Visualização da localização mais recente de veículos e dispositivos cadastrados.</p>
+          </article>
+          <article class="card">
+            <h3>Histórico de trajetos</h3>
+            <p>Consulta de rotas, deslocamentos, horários, paradas e distâncias percorridas.</p>
+          </article>
+          <article class="card">
+            <h3>Cercas geográficas</h3>
+            <p>Criação de áreas virtuais para acompanhar entradas, saídas e permanência em locais definidos.</p>
+          </article>
+          <article class="card">
+            <h3>Alertas e notificações</h3>
+            <p>Configuração de avisos relacionados a eventos relevantes para a operação.</p>
+          </article>
+          <article class="card">
+            <h3>Relatórios operacionais</h3>
+            <p>Geração de informações consolidadas sobre deslocamentos, eventos, utilização e desempenho.</p>
+          </article>
+          <article class="card">
+            <h3>Gestão de dispositivos</h3>
+            <p>Cadastro, organização e acompanhamento dos equipamentos vinculados à plataforma.</p>
+          </article>
+          <article class="card">
+            <h3>Monitoramento de condução</h3>
+            <p>Acompanhamento de eventos relacionados à velocidade e ao comportamento dos veículos, quando os dispositivos e a configuração utilizada fornecerem esses dados.</p>
+          </article>
+          <article class="card">
+            <h3>Perfis e permissões</h3>
+            <p>Organização de usuários, grupos e níveis de acesso conforme as responsabilidades da equipe.</p>
+          </article>
+        </div>
+        <p class="note">
+          A disponibilidade de determinados dados e recursos pode variar conforme o equipamento de rastreamento,
+          a forma de integração e a configuração contratada.
+        </p>
+      </div>
+    </section>
+
+    <section id="aplicacoes">
+      <div class="container">
+        <h2 class="section-title">Uma plataforma adaptável a diferentes necessidades</h2>
+        <div class="cards three">
+          <article class="card">
+            <h3>Frotas empresariais</h3>
+            <p>Acompanhamento de veículos utilizados por equipes comerciais, técnicas e administrativas.</p>
+          </article>
+          <article class="card">
+            <h3>Máquinas e equipamentos</h3>
+            <p>Monitoramento de equipamentos móveis, máquinas e ativos operacionais compatíveis.</p>
+          </article>
+          <article class="card">
+            <h3>Entregas e serviços externos</h3>
+            <p>Maior visibilidade sobre deslocamentos e execução de atividades em campo.</p>
+          </article>
+          <article class="card">
+            <h3>Dispositivos móveis</h3>
+            <p>Localização de smartphones autorizados e configurados para envio de posição.</p>
+          </article>
+          <article class="card">
+            <h3>Segurança de ativos</h3>
+            <p>Acompanhamento de bens móveis e identificação de movimentações relevantes.</p>
+          </article>
+          <article class="card">
+            <h3>Operações públicas e institucionais</h3>
+            <p>Apoio ao acompanhamento de veículos, equipes e equipamentos utilizados por órgãos e instituições.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <h2 class="section-title">Da configuração ao acompanhamento da operação</h2>
+        <div class="flow">
+          <article class="flow-step">
+            <span class="flow-number">1</span>
+            <h3>Entendimento da necessidade</h3>
+            <p>A UpScrum avalia os tipos de ativos, usuários, equipamentos e informações relevantes para a operação.</p>
+          </article>
+          <article class="flow-step">
+            <span class="flow-number">2</span>
+            <h3>Implantação da plataforma</h3>
+            <p>O ambiente é configurado com identidade, permissões, grupos, dispositivos e parâmetros adequados ao projeto.</p>
+          </article>
+          <article class="flow-step">
+            <span class="flow-number">3</span>
+            <h3>Conexão dos dispositivos</h3>
+            <p>Os equipamentos compatíveis são cadastrados e configurados para enviar informações à plataforma.</p>
+          </article>
+          <article class="flow-step">
+            <span class="flow-number">4</span>
+            <h3>Uso e acompanhamento</h3>
+            <p>A equipe passa a acessar mapas, eventos, históricos e relatórios conforme as permissões definidas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <h2 class="section-title">Mais do que disponibilizar uma plataforma</h2>
+          <p class="section-text">
+            A solução pode ser adaptada ao porte e à necessidade de cada operação. O cliente
+            contrata o ambiente, os serviços e o nível de suporte adequados ao seu contexto,
+            sem precisar lidar diretamente com toda a complexidade técnica da implantação.
+          </p>
+        </div>
+        <ul class="check-list">
+          <li>Implantação orientada à realidade do cliente</li>
+          <li>Configuração de usuários, grupos e permissões</li>
+          <li>Apoio na conexão de dispositivos compatíveis</li>
+          <li>Personalização de identidade visual</li>
+          <li>Infraestrutura gerenciada</li>
+          <li>Orientação inicial para utilização</li>
+          <li>Possibilidade de integrações e evoluções</li>
+          <li>Suporte técnico conforme o plano contratado</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <h2 class="section-title">Configurada para a sua operação</h2>
+          <p class="section-text">
+            Cada organização possui necessidades diferentes de rastreamento, acesso e visualização.
+            Por isso, a UpScrum estrutura a solução conforme os tipos de ativos, equipamentos,
+            usuários, permissões e relatórios necessários para o projeto.
+          </p>
+        </div>
+        <ul class="check-list">
+          <li>Nome e identidade visual do ambiente</li>
+          <li>Grupos de veículos e dispositivos</li>
+          <li>Perfis de acesso</li>
+          <li>Cercas geográficas</li>
+          <li>Alertas</li>
+          <li>Notificações</li>
+          <li>Relatórios</li>
+          <li>Dashboards</li>
+          <li>Integrações</li>
+          <li>Infraestrutura</li>
+          <li>Rotinas de suporte</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div>
+          <h2 class="section-title">Rastreamento com responsabilidade</h2>
+          <p class="section-text">
+            A implantação deve considerar controle de acesso, proteção das informações, definição
+            de responsabilidades e uso autorizado dos dados de localização. A UpScrum auxilia na
+            configuração técnica da solução, enquanto cada organização permanece responsável por
+            utilizar o rastreamento de forma legítima, transparente e compatível com suas obrigações legais.
+          </p>
+        </div>
+        <ul class="check-list">
+          <li>Acesso protegido por autenticação</li>
+          <li>Permissões conforme o perfil do usuário</li>
+          <li>Acesso restrito às informações necessárias</li>
+          <li>Possibilidade de hospedagem em infraestrutura definida para o projeto</li>
+          <li>Orientação para políticas internas de utilização</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-title">
+      <div class="container">
+        <h2 class="section-title" id="faq-title">Perguntas frequentes</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-button-1">Quais dispositivos podem ser utilizados?</button>
+            <div class="faq-answer" id="faq-1" role="region" aria-labelledby="faq-button-1" hidden>
+              A compatibilidade depende do fabricante, do modelo e do protocolo utilizado pelo equipamento. A UpScrum avalia cada necessidade antes da implantação.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-button-2">A plataforma funciona em celulares?</button>
+            <div class="faq-answer" id="faq-2" role="region" aria-labelledby="faq-button-2" hidden>
+              É possível utilizar dispositivos móveis configurados para enviar informações de localização, desde que haja autorização e compatibilidade com a solução adotada.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-button-3">É necessário comprar rastreadores com a UpScrum?</button>
+            <div class="faq-answer" id="faq-3" role="region" aria-labelledby="faq-button-3" hidden>
+              Não necessariamente. A possibilidade de utilizar equipamentos existentes deve ser avaliada conforme o modelo, a configuração e o protocolo de comunicação.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-button-4">Posso acompanhar vários veículos?</button>
+            <div class="faq-answer" id="faq-4" role="region" aria-labelledby="faq-button-4" hidden>
+              Sim. O ambiente pode ser estruturado para diferentes quantidades de veículos e dispositivos, conforme o plano e a infraestrutura contratados.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-button-5">É possível criar alertas?</button>
+            <div class="faq-answer" id="faq-5" role="region" aria-labelledby="faq-button-5" hidden>
+              A plataforma pode ser configurada para gerar notificações relacionadas a eventos, cercas geográficas e outras condições disponíveis no dispositivo ou no sistema.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-button-6">A solução pode utilizar a identidade da minha empresa?</button>
+            <div class="faq-answer" id="faq-6" role="region" aria-labelledby="faq-button-6" hidden>
+              Sim. O ambiente pode receber personalizações de nome, marca e elementos visuais, conforme o escopo contratado.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-7" id="faq-button-7">A UpScrum fornece suporte?</button>
+            <div class="faq-answer" id="faq-7" role="region" aria-labelledby="faq-button-7" hidden>
+              Sim. Os serviços de implantação, configuração, treinamento e suporte devem ser definidos na proposta comercial.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-8" id="faq-button-8">Os dados de localização são públicos?</button>
+            <div class="faq-answer" id="faq-8" role="region" aria-labelledby="faq-button-8" hidden>
+              Não. O acesso deve ser restrito aos usuários autorizados e configurado de acordo com suas permissões.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2 class="section-title">Tenha mais visibilidade sobre seus veículos e ativos.</h2>
+          <p>
+            Converse com a UpScrum para avaliar os dispositivos, os recursos e a infraestrutura
+            mais adequados à sua operação.
+          </p>
+          <form class="contact-form" data-contact-form>
+            <input type="hidden" name="subject" value="Solicitar demonstração - UpScrum Tracking" />
+            <div class="form-row">
+              <div class="form-field">
+                <label for="tracking-contact-name">Nome</label>
+                <input id="tracking-contact-name" type="text" name="name" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="tracking-contact-email">E-mail</label>
+                <input id="tracking-contact-email" type="email" name="email" autocomplete="email" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="tracking-contact-whatsapp">WhatsApp</label>
+              <input id="tracking-contact-whatsapp" type="tel" name="whatsapp" autocomplete="tel" />
+            </div>
+            <div class="form-field">
+              <label for="tracking-contact-message">Mensagem</label>
+              <textarea id="tracking-contact-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-primary btn-submit" type="submit">Solicitar demonstração</button>
+            <p class="form-note">Resposta pelo e-mail contato@upscrum.com.br.</p>
+            <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 UpScrum. Solução de rastreamento e monitoramento de ativos.
+    </div>
+  </footer>
+
+  <script>
+    const PRODUCT_NAME = "UpScrum Tracking";
+
+    document.querySelectorAll("[data-product-name]").forEach((element) => {
+      element.textContent = PRODUCT_NAME;
+    });
+
+    document.querySelectorAll(".faq-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        const answer = document.getElementById(button.getAttribute("aria-controls"));
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isExpanded));
+        answer.hidden = isExpanded;
+      });
+    });
+  </script>
+  <script src="contact.js"></script>
+</body>
+</html>
