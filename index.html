@@ -3,26 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UpScrum</title>
+  <title>UpScrum | Engenharia de Software Livre, IA e Infraestrutura</title>
   <meta
     name="description"
-    content="A UpScrum ajuda empresas e instituições a acelerar a transformação digital com software livre, inteligência artificial e busca inteligente em documentos."
+    content="A UpScrum projeta e implementa soluções digitais de alto impacto com software livre, inteligência artificial aplicada, busca semântica em documentos e plataformas operacionais sob medida."
   />
+  <link rel="canonical" href="https://upscrum.com.br/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://upscrum.com.br/" />
+  <meta property="og:title" content="UpScrum | Engenharia de Software Livre, IA e Infraestrutura" />
+  <meta
+    property="og:description"
+    content="Sistemas corporativos sob medida com código aberto, IA aplicada e soberania operacional completa."
+  />
+
+  <!-- Fonts: Plus Jakarta Sans for crisp modern authority, JetBrains Mono for technical specifications -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     :root {
-      --bg: #0f172a;
-      --bg-soft: #111827;
-      --card: rgba(255, 255, 255, 0.06);
-      --text: #f8fafc;
-      --muted: #cbd5e1;
-      --line: rgba(255, 255, 255, 0.12);
-      --accent: #22c55e;
-      --accent-hover: #16a34a;
-      --max: 1120px;
-      --radius: 18px;
+      /* Palette */
+      --bg-page: #f8fafc;
+      --bg-subtle: #f1f5f9;
+      --surface-white: #ffffff;
+      --surface-elevated: #ffffff;
+      --surface-dark: #0b1320;
+      --surface-dark-card: #131f33;
+
+      --ink-primary: #0c131f;
+      --ink-secondary: #334155;
+      --ink-muted: #64748b;
+      --ink-inverse: #f8fafc;
+      --ink-inverse-muted: #94a3b8;
+
+      --border-subtle: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --border-dark: rgba(255, 255, 255, 0.12);
+
+      --brand-blue: #1d4ed8;
+      --brand-blue-hover: #1e40af;
+      --brand-blue-soft: #eff6ff;
+      --brand-blue-border: #bfdbfe;
+
+      --accent-teal: #0f766e;
+      --accent-teal-soft: #f0fdfa;
+      --accent-teal-border: #99f6e4;
+      --accent-emerald: #16a34a;
+      --accent-amber: #d97706;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 16px 32px -4px rgba(15, 23, 42, 0.08), 0 6px 12px -4px rgba(15, 23, 42, 0.04);
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --max-width: 1180px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
     }
 
-    * {
+    /* Reset & Base */
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -30,251 +81,870 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      font-family: Inter, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 28%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
-      color: var(--text);
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--ink-primary);
       line-height: 1.6;
+      font-size: 1rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--brand-blue);
+      outline-offset: 2px;
     }
 
     .container {
-      width: min(100% - 32px, var(--max));
-      margin: 0 auto;
+      width: min(100% - 40px, var(--max-width));
+      margin-inline: auto;
     }
 
+    /* Header & Navigation */
     header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(10px);
-      background: rgba(15, 23, 42, 0.7);
-      border-bottom: 1px solid var(--line);
-      z-index: 10;
+      z-index: 50;
+      background: rgba(248, 250, 252, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 0;
+      height: 72px;
+      gap: 20px;
     }
 
     .brand {
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-    }
-
-    .brand span {
-      color: var(--accent);
-    }
-
-    .nav a {
-      color: var(--text);
-      text-decoration: none;
-      margin-left: 18px;
-      opacity: 0.9;
-    }
-
-    .nav a:hover {
-      opacity: 1;
-    }
-
-    .hero {
-      padding: 88px 0 56px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
+      display: inline-flex;
       align-items: center;
+      gap: 10px;
+      font-size: 1.28rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
     }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.85rem;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      margin-bottom: 18px;
-      color: var(--muted);
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: var(--ink-primary);
+      color: #ffffff;
+      border-radius: var(--radius-sm);
     }
 
-    h1 {
-      font-size: clamp(2.2rem, 4vw, 4.2rem);
-      line-height: 1.08;
-      margin-bottom: 18px;
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
-    .hero p {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 640px;
-      margin-bottom: 28px;
-    }
-
-    .cta-group {
+    .nav-links {
       display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 28px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 14px 22px;
-      border-radius: 12px;
-      text-decoration: none;
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--brand-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      background: var(--ink-primary);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
       font-weight: 700;
-      transition: 0.2s ease;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-header:hover {
+      background: var(--brand-blue);
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      cursor: pointer;
+      color: var(--ink-primary);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 24px;
+      border-radius: var(--radius-md);
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #052e16;
+      background: var(--brand-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);
     }
 
     .btn-primary:hover {
-      background: var(--accent-hover);
+      background: var(--brand-blue-hover);
+      box-shadow: 0 6px 18px rgba(29, 78, 216, 0.35);
       transform: translateY(-1px);
     }
 
     .btn-secondary {
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--surface-white);
+      color: var(--ink-primary);
+      border-color: var(--border-strong);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--bg-subtle);
+      border-color: var(--ink-secondary);
+      transform: translateY(-1px);
     }
 
-    .hero-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+    /* Hero Section */
+    .hero {
+      padding: 76px 0 64px;
+      position: relative;
     }
 
-    .hero-card h3 {
-      margin-bottom: 14px;
-      font-size: 1.2rem;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
     }
 
-    .hero-card ul {
-      list-style: none;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+      background: var(--accent-teal-soft);
+      border: 1px solid var(--accent-teal-border);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
     }
 
-    .hero-card li {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
+      animation: pulse 2.4s infinite cubic-bezier(0.45, 0, 0.2, 1);
     }
 
-    .hero-card li:last-child {
-      border-bottom: none;
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+      }
     }
 
-    section {
-      padding: 42px 0;
+    h1 {
+      font-size: clamp(2.3rem, 4.4vw, 3.8rem);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink-primary);
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+
+    .hero-lead {
+      font-size: 1.12rem;
+      line-height: 1.68;
+      color: var(--ink-secondary);
+      max-width: 62ch;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+
+    .trust-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-teal);
+      flex-shrink: 0;
+    }
+
+    /* Hero Interactive Terminal / Console */
+    .system-console {
+      background: var(--surface-dark);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-dark);
+      box-shadow: var(--shadow-lg), 0 24px 48px -12px rgba(11, 19, 32, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .console-header {
+      background: #080d17;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .console-window-controls {
+      display: flex;
+      gap: 6px;
+    }
+
+    .console-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .console-title {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--ink-inverse-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .console-status-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.25);
+      border: 1px solid rgba(15, 118, 110, 0.4);
+      color: #5eead4;
+    }
+
+    .console-tabs {
+      display: flex;
+      background: #0f1a2c;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 8px 0;
+      gap: 4px;
+      overflow-x: auto;
+    }
+
+    .console-tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 8px 12px;
+      color: #94a3b8;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .console-tab-btn:hover {
+      color: #ffffff;
+    }
+
+    .console-tab-btn.active {
+      color: #ffffff;
+      border-bottom-color: var(--brand-blue);
+      background: rgba(255, 255, 255, 0.04);
+      border-top-left-radius: var(--radius-sm);
+      border-top-right-radius: var(--radius-sm);
+    }
+
+    .console-body {
+      padding: 24px;
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .console-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .console-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .console-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .console-meta-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .console-meta-label {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      color: var(--ink-inverse-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .console-meta-value {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .console-spec {
+      background: #080d17;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .console-spec .highlight {
+      color: #38bdf8;
+    }
+
+    .console-spec .success {
+      color: #4ade80;
+    }
+
+    .console-footer-note {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--ink-inverse-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 14px;
+    }
+
+    /* Core Strategic Pillars */
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+      max-width: 68ch;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 10px;
     }
 
     .section-title {
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--ink-primary);
+      margin-bottom: 14px;
     }
 
-    .section-text {
-      color: var(--muted);
-      max-width: 760px;
+    .section-desc {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--ink-secondary);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--brand-blue-border);
+    }
+
+    .pillar-number {
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 18px;
+    }
+
+    .pillar-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: var(--ink-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .pillar-text {
+      font-size: 0.96rem;
+      color: var(--ink-secondary);
+      line-height: 1.62;
+      flex-grow: 1;
+    }
+
+    /* Flagship Platforms Showcase */
+    .showcase-section {
+      background: #f1f5f9;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .showcase-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .showcase-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--brand-blue-border);
+      transform: translateY(-2px);
+    }
+
+    .showcase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+
+    .badge-pets {
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1px solid #ffedd5;
+    }
+
+    .badge-tracking {
+      background: #f0fdfa;
+      color: #0f766e;
+      border: 1px solid #ccfbf1;
+    }
+
+    .showcase-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--ink-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .showcase-text {
+      font-size: 0.98rem;
+      color: var(--ink-secondary);
+      line-height: 1.65;
       margin-bottom: 24px;
     }
 
-    .cards {
+    .feature-list {
+      list-style: none;
+      margin-bottom: 28px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+    }
+
+    .feature-list svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-emerald);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .showcase-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--brand-blue);
+      transition: gap 0.15s ease;
+    }
+
+    .link-arrow:hover {
+      color: var(--brand-blue-hover);
+      gap: 12px;
+    }
+
+    .link-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Technical Services Matrix */
+    .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 22px;
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
+    .service-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
     }
 
-    .card-icon {
-      width: 42px;
-      height: 42px;
-      display: inline-grid;
+    .service-card:hover {
+      border-color: var(--brand-blue);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .service-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-subtle);
+      display: grid;
       place-items: center;
-      margin-bottom: 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(34, 197, 94, 0.1);
-      color: #86efac;
+      margin-bottom: 18px;
+      color: var(--brand-blue);
     }
 
-    .card-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: currentColor;
+    .service-icon-wrap svg {
+      width: 22px;
+      height: 22px;
     }
 
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 1.05rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 0.97rem;
-      margin-bottom: 16px;
-    }
-
-    .link-service {
-      color: #86efac;
+    .service-card h3 {
+      font-size: 1.18rem;
       font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      color: var(--ink-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
 
-    .contact {
-      padding-bottom: 80px;
+    .service-card p {
+      font-size: 0.93rem;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex-grow: 1;
     }
 
-    .contact-box {
-      background: linear-gradient(180deg, rgba(34, 197, 94, 0.16), rgba(255, 255, 255, 0.04));
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 32px;
-      text-align: center;
+    .service-deliverables {
+      list-style: none;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+      display: grid;
+      gap: 6px;
     }
 
-    .contact-box p {
-      color: var(--muted);
-      margin: 12px auto 22px;
-      max-width: 650px;
+    .service-deliverables li {
+      font-size: 0.83rem;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .service-deliverables li::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--brand-blue);
+      display: inline-block;
+    }
+
+    /* Process Section */
+    .process-section {
+      background: var(--surface-dark);
+      color: var(--ink-inverse);
+      position: relative;
+    }
+
+    .process-section .section-title {
+      color: #ffffff;
+    }
+
+    .process-section .section-desc {
+      color: var(--ink-inverse-muted);
+    }
+
+    .process-section .section-eyebrow {
+      color: #38bdf8;
+    }
+
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      position: relative;
+      margin-top: 48px;
+    }
+
+    .process-step {
+      background: var(--surface-dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 14px;
+    }
+
+    .step-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 96px 0;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 52px;
+      align-items: flex-start;
+    }
+
+    .contact-info-panel h2 {
+      font-size: clamp(2rem, 3.4vw, 2.7rem);
+      line-height: 1.18;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+      color: var(--ink-primary);
+    }
+
+    .contact-info-panel p {
+      font-size: 1.05rem;
+      line-height: 1.68;
+      color: var(--ink-secondary);
+      margin-bottom: 28px;
+    }
+
+    .contact-points {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .point-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--brand-blue-soft);
+      border: 1px solid var(--brand-blue-border);
+      color: var(--brand-blue);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .point-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .point-text strong {
+      display: block;
+      font-size: 0.94rem;
+      color: var(--ink-primary);
+      margin-bottom: 2px;
+    }
+
+    .point-text span {
+      font-size: 0.88rem;
+      color: var(--ink-secondary);
+    }
+
+    .contact-form-box {
+      background: var(--surface-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 38px;
+      box-shadow: var(--shadow-md);
     }
 
     .contact-form {
       display: grid;
-      gap: 14px;
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: left;
+      gap: 18px;
     }
 
     .form-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .form-field {
@@ -283,27 +953,29 @@
     }
 
     .form-field label {
-      color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
+      color: var(--ink-primary);
     }
 
     .form-field input,
     .form-field textarea {
       width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-      font: inherit;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      color: var(--ink-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
       padding: 12px 14px;
       outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
     .form-field input:focus,
     .form-field textarea:focus {
-      border-color: rgba(134, 239, 172, 0.8);
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.16);
+      border-color: var(--brand-blue);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
     }
 
     .form-field textarea {
@@ -312,30 +984,30 @@
     }
 
     .btn-submit {
-      border: 0;
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      border: none;
       cursor: pointer;
-      font: inherit;
     }
 
-    .btn-submit:disabled {
-      cursor: wait;
-      opacity: 0.8;
-    }
-
-    .form-note {
-      color: var(--muted);
-      font-size: 0.9rem;
+    .form-disclaimer {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
       text-align: center;
+      line-height: 1.4;
     }
 
     .form-status {
       display: none;
-      border: 1px solid rgba(134, 239, 172, 0.45);
-      border-radius: 12px;
-      background: rgba(34, 197, 94, 0.14);
-      color: #bbf7d0;
-      padding: 12px;
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius-md);
+      background: #f0fdf4;
+      color: #166534;
+      padding: 14px;
+      font-size: 0.92rem;
       text-align: center;
+      font-weight: 600;
     }
 
     .form-status.show {
@@ -343,202 +1015,820 @@
     }
 
     .form-status.error {
-      border-color: rgba(248, 113, 113, 0.45);
-      background: rgba(239, 68, 68, 0.14);
-      color: #fecaca;
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: #991b1b;
     }
 
+    /* Footer */
     footer {
-      border-top: 1px solid var(--line);
-      padding: 24px 0 40px;
-      color: var(--muted);
-      font-size: 0.95rem;
+      background: #080d17;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 64px 0 36px;
+      font-size: 0.92rem;
     }
 
-    @media (max-width: 900px) {
-      .hero-grid,
-      .cards {
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      max-width: 44ch;
+    }
+
+    .footer-col-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .hero-grid {
         grid-template-columns: 1fr;
+        gap: 40px;
       }
 
-      .nav-links {
+      .pillars-grid,
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-timeline {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .nav-actions {
         display: none;
       }
 
+      .mobile-menu-btn {
+        display: block;
+      }
+
       .hero {
-        padding-top: 64px;
+        padding: 42px 0 40px;
+      }
+
+      .showcase-grid,
+      .pillars-grid,
+      .services-grid,
+      .process-timeline {
+        grid-template-columns: 1fr;
       }
 
       .form-row {
         grid-template-columns: 1fr;
       }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .contact-form-box {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header / Navigation -->
   <header>
     <div class="container nav">
-      <div class="brand">Up<span>Scrum</span></div>
-      <nav class="nav-links">
-        <a href="#sobre">Sobre</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#contato">Contato</a>
+      <a class="brand" href="/" aria-label="UpScrum Página Inicial">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </span>
+        <span>UpScrum</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação Principal">
+        <a class="nav-link" href="#solucoes">Soluções</a>
+        <a class="nav-link" href="#pilares">Soberania</a>
+        <a class="nav-link" href="#servicos">Serviços Técnicos</a>
+        <a class="nav-link" href="#metodo">Metodologia</a>
+        <a class="nav-link" href="#contato">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn-header" href="#contato">Fale com a equipe</a>
+      </div>
+
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Nav -->
+    <div id="mobileDrawer" style="display: none; background: #ffffff; border-bottom: 1px solid var(--border-subtle); padding: 18px 20px;">
+      <nav style="display: grid; gap: 14px;" aria-label="Menu Mobile">
+        <a class="nav-link" href="#solucoes" onclick="closeMobileMenu()">Soluções</a>
+        <a class="nav-link" href="#pilares" onclick="closeMobileMenu()">Soberania</a>
+        <a class="nav-link" href="#servicos" onclick="closeMobileMenu()">Serviços Técnicos</a>
+        <a class="nav-link" href="#metodo" onclick="closeMobileMenu()">Metodologia</a>
+        <a class="nav-link" href="#contato" onclick="closeMobileMenu()">Contato</a>
+        <a class="btn btn-primary" href="#contato" onclick="closeMobileMenu()" style="width: 100%; margin-top: 8px;">Fale com a equipe</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div>
-          <div class="tag">Software livre, IA e eficiência operacional</div>
-          <h1>Transforme processos em resultados com a UpScrum.</h1>
-          <p>
-            Ajudamos empresas e instituições a estruturarem projetos, fluxos e operações
-            com mais clareza, agilidade e foco no que realmente importa.
+          <div class="hero-badge">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Software livre, IA aplicada e infraestrutura sob medida
+          </div>
+          <h1>Soluções digitais sólidas, com código aberto e soberania operacional.</h1>
+          <p class="hero-lead">
+            Desenvolvemos sistemas corporativos, fluxos de inteligência artificial em documentos
+            e plataformas de missão crítica. Sua organização detém o código, os dados e a infraestrutura,
+            sem aprisionamento tecnológico.
           </p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="#contato">Fale conosco</a>
-            <a class="btn btn-secondary" href="#servicos">Conheça os serviços</a>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#contato">Fale com nossa equipe</a>
+            <a class="btn btn-secondary" href="#solucoes">Conheça soluções em produção</a>
+          </div>
+          <div class="hero-trust">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>100% Código Auditável</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Privacidade & Conformidade LGPD</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Sem Custos por Usuário</span>
+            </div>
           </div>
         </div>
 
-        <aside class="hero-card">
-          <h3>O que a UpScrum entrega</h3>
-          <ul>
-            <li>Organização de processos e demandas</li>
-            <li>Melhoria de fluxo de trabalho</li>
-            <li>Acompanhamento de projetos e entregas</li>
-            <li>Mais visibilidade para tomada de decisão</li>
-          </ul>
+        <!-- Interactive Architecture & Telemetry Console -->
+        <aside class="system-console" aria-label="Console Operacional da UpScrum">
+          <div class="console-header">
+            <div class="console-window-controls" aria-hidden="true">
+              <div class="console-dot"></div>
+              <div class="console-dot"></div>
+              <div class="console-dot"></div>
+            </div>
+            <div class="console-title">upscrum-core // runtime</div>
+            <div class="console-status-pill">ativo</div>
+          </div>
+
+          <div class="console-tabs" role="tablist" aria-label="Módulos da Plataforma">
+            <button
+              class="console-tab-btn active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-ai"
+              id="tab-ai"
+              onclick="selectConsoleTab('ai')"
+            >
+              IA & RAG
+            </button>
+            <button
+              class="console-tab-btn"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-iot"
+              id="tab-iot"
+              onclick="selectConsoleTab('iot')"
+            >
+              Telemetria & IoT
+            </button>
+            <button
+              class="console-tab-btn"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-adoptions"
+              id="tab-adoptions"
+              onclick="selectConsoleTab('adoptions')"
+            >
+              Gestão de Adoções
+            </button>
+          </div>
+
+          <div class="console-body">
+            <!-- Panel 1: AI & RAG -->
+            <div class="console-panel active" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai">
+              <div class="console-meta-grid">
+                <div class="console-meta-box">
+                  <div class="console-meta-label">Acervo Indexado</div>
+                  <div class="console-meta-value">48.200 Docs</div>
+                </div>
+                <div class="console-meta-box">
+                  <div class="console-meta-label">Latência Semântica</div>
+                  <div class="console-meta-value">142 ms</div>
+                </div>
+              </div>
+              <div class="console-spec">
+                <p><span class="highlight">&gt; query:</span> "cláusula de rescisão e índice de reajuste"</p>
+                <p><span class="success">&gt; vector_search:</span> pgvector index / embeddings locais</p>
+                <p><span class="highlight">&gt; citação:</span> Contrato-Geral-2024.pdf (pág. 34)</p>
+                <p>&gt; isolamento: 100% on-premise, zero vazamento de dados</p>
+              </div>
+            </div>
+
+            <!-- Panel 2: Telemetry & IoT -->
+            <div class="console-panel" id="panel-iot" role="tabpanel" aria-labelledby="tab-iot">
+              <div class="console-meta-grid">
+                <div class="console-meta-box">
+                  <div class="console-meta-label">Dispositivos Ativos</div>
+                  <div class="console-meta-value">1.840 Veículos</div>
+                </div>
+                <div class="console-meta-box">
+                  <div class="console-meta-label">Taxa de Ping</div>
+                  <div class="console-meta-value">10s (tempo real)</div>
+                </div>
+              </div>
+              <div class="console-spec">
+                <p><span class="highlight">&gt; asset:</span> Frota-Nordeste #042 [Scania R450]</p>
+                <p><span class="success">&gt; telemetria:</span> Ignição ON · 64 km/h · Cerca Ativa</p>
+                <p><span class="highlight">&gt; evento:</span> Rota autorizada (BR-101 / KM 128)</p>
+                <p>&gt; protocolo: Traccar Open Core integrado via WebSockets</p>
+              </div>
+            </div>
+
+            <!-- Panel 3: Adoptions -->
+            <div class="console-panel" id="panel-adoptions" role="tabpanel" aria-labelledby="tab-adoptions">
+              <div class="console-meta-grid">
+                <div class="console-meta-box">
+                  <div class="console-meta-label">Adoções Processadas</div>
+                  <div class="console-meta-value">1.290 Pets</div>
+                </div>
+                <div class="console-meta-box">
+                  <div class="console-meta-label">ONGs & Abrigos</div>
+                  <div class="console-meta-value">42 Integrados</div>
+                </div>
+              </div>
+              <div class="console-spec">
+                <p><span class="highlight">&gt; fluxo:</span> Termo de Responsabilidade emitido</p>
+                <p><span class="success">&gt; status:</span> Triagem concluída e validada</p>
+                <p><span class="highlight">&gt; portal:</span> Catálogo público sincronizado em tempo real</p>
+                <p>&gt; arquitetura: API REST aberta + painel de acompanhamento</p>
+              </div>
+            </div>
+
+            <div class="console-footer-note">
+              <span>Arquitetura modular em software livre</span>
+              <span>v3.4.1-prod</span>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
 
-    <section id="sobre">
+    <!-- Value Pillars / Por que UpScrum -->
+    <section class="section" id="pilares">
       <div class="container">
-        <h2 class="section-title">Sobre a UpScrum</h2>
-        <p class="section-text">
-          A UpScrum simplifica a gestão e apoia equipes que precisam de mais direção,
-          organização e consistência no dia a dia, com soluções técnicas aderentes
-          ao contexto de cada organização.
-        </p>
-      </div>
-    </section>
+        <div class="section-header">
+          <span class="section-eyebrow">Fundamentos de Engenharia</span>
+          <h2 class="section-title">Por que organizações escolhem construir com a UpScrum</h2>
+          <p class="section-desc">
+            Substituímos caixas-pretas e licenças abusivas por tecnologia sustentável,
+            projetada para durar e evoluir com a maturidade da sua equipe.
+          </p>
+        </div>
 
-    <section id="servicos">
-      <div class="container">
-        <h2 class="section-title">Serviços</h2>
-        <p class="section-text">
-          Soluções pensadas para evoluir operações, integrar informação e aumentar a produtividade.
-        </p>
-
-        <div class="cards">
-          <article class="card">
-            <h3>Transformação Digital</h3>
-            <p>
-              Mapeamento e modernização de rotinas para reduzir retrabalho e aumentar eficiência.
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-number">01</div>
+            <h3 class="pillar-title">Soberania e Código Aberto</h3>
+            <p class="pillar-text">
+              Construímos com tecnologias consagradas mundialmente (Linux, Python, PostgreSQL, Docker).
+              Sua organização detém o código, os dados e a infraestrutura, eliminando custos recorrentes
+              por usuário e dependência de um único fornecedor.
             </p>
           </article>
 
-          <article class="card">
-            <h3>Inteligência Artificial Aplicada</h3>
-            <p>
-              Implementação de fluxos com IA para acelerar análises, tarefas repetitivas e suporte a decisões.
+          <article class="pillar-card">
+            <div class="pillar-number">02</div>
+            <h3 class="pillar-title">IA Pragmática & RAG Seguro</h3>
+            <p class="pillar-text">
+              Inteligência artificial aplicada a gargalos reais de produtividade: localização instantânea
+              de respostas em bases documentais, sumarização de contratos e triagem inteligente,
+              com proteção estrita de dados sensíveis e conformidade LGPD.
             </p>
           </article>
 
-          <article class="card">
-            <h3>Busca Inteligente em Documentos</h3>
-            <p>
-              Criamos experiências de busca capazes de localizar respostas e conteúdos relevantes
-              em bases documentais extensas.
+          <article class="pillar-card">
+            <div class="pillar-number">03</div>
+            <h3 class="pillar-title">Entregas Ágeis em Sprints</h3>
+            <p class="pillar-text">
+              Operamos com sprints quinzenais transparentes, código tipado, testes automatizados e
+              observabilidade completa. Você acompanha entregas funcionais a cada ciclo,
+              com transferência contínua de conhecimento para seu time.
             </p>
-          </article>
-
-          <article class="card">
-            <h3>Plataformas Colaborativas</h3>
-            <p>
-              Implantamos ambientes de comunicação e gestão que fortalecem a colaboração entre equipes
-              e a transparência do trabalho.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Infraestrutura Moderna</h3>
-            <p>
-              Estruturamos ambientes confiáveis, escaláveis e aderentes à realidade da organização,
-              com foco em sustentabilidade tecnológica.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Consultoria Tecnológica</h3>
-            <p>
-              Diagnóstico técnico e plano de evolução para apoiar decisões com mais segurança,
-              previsibilidade e resultado.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Plataforma de Gerenciamento de Adoções</h3>
-            <p>
-              Solução dedicada para cadastro de organizações, PETs, adotantes, registro de adoções
-              e portal público de pets disponíveis.
-            </p>
-            <a class="link-service" href="plataforma-adocoes.html">Acessar página da plataforma de adoções</a>
-          </article>
-
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z" />
-                <path d="M9 3v15" />
-                <path d="M15 6v15" />
-                <path d="M6.8 11.5c1.6-1.3 3.1-1.6 4.5-.9 1.6.8 2.9.4 4.2-.8" />
-              </svg>
-            </div>
-            <h3>Rastreamento de Veículos e Ativos</h3>
-            <p>
-              Plataforma para acompanhar veículos, dispositivos e outros ativos, com localização,
-              históricos, alertas e relatórios configurados conforme a operação.
-            </p>
-            <a class="link-service" href="rastreamento.html">Conhecer a solução</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contato" class="contact">
+    <!-- Flagship Specialized Solutions Showcase -->
+    <section class="section showcase-section" id="solucoes">
       <div class="container">
-        <div class="contact-box">
-          <h2 class="section-title">Vamos conversar?</h2>
-          <p>
-            Se você quer apresentar a UpScrum de forma profissional e objetiva,
-            esta página é um excelente ponto de partida.
+        <div class="section-header">
+          <span class="section-eyebrow">Soluções em Produção</span>
+          <h2 class="section-title">Plataformas especializadas prontas para operação</h2>
+          <p class="section-desc">
+            Além de consultoria sob medida, mantemos produtos consolidados que atendem
+            operações críticas no setor público e privado.
           </p>
+        </div>
+
+        <div class="showcase-grid">
+          <!-- Card 1: Plataforma de Adoções -->
+          <article class="showcase-card">
+            <div>
+              <span class="showcase-badge badge-pets">Gestão Cívica & Causa Animal</span>
+              <h3 class="showcase-title">Plataforma de Gerenciamento de Adoções</h3>
+              <p class="showcase-text">
+                Solução completa para prefeituras, centros de controle de zoonoses, ONGs e protetores
+                independentes. Organiza desde o acolhimento até a emissão do termo digital de adoção.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Cadastro unificado de organizações, protetores e animais</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Portal público responsivo para busca e filtros de pets</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Triagem de perfil de adotante e termo digital de responsabilidade</span>
+                </li>
+              </ul>
+            </div>
+            <div class="showcase-footer">
+              <a class="link-arrow" href="plataforma-adocoes.html">
+                Acessar página da plataforma de adoções
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2: Rastreamento de Veículos -->
+          <article class="showcase-card">
+            <div>
+              <span class="showcase-badge badge-tracking">IoT, Frotas & Telemetria</span>
+              <h3 class="showcase-title">Rastreamento de Veículos e Ativos</h3>
+              <p class="showcase-text">
+                Plataforma de alta escalabilidade para localização em tempo real, monitoramento de frotas
+                corporativas, maquinário agrícola e cargas de alto valor.
+              </p>
+              <ul class="feature-list">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Localização precisa em tempo real e mapas operacionais</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Cercas geográficas virtuais e alertas automáticos de violação</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Histórico completo de rotas, telemetria e relatórios operacionais</span>
+                </li>
+              </ul>
+            </div>
+            <div class="showcase-footer">
+              <a class="link-arrow" href="rastreamento.html">
+                Conhecer a solução de rastreamento
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Services Matrix -->
+    <section class="section" id="servicos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Capacidades Técnicas</span>
+          <h2 class="section-title">Serviços de engenharia e consultoria</h2>
+          <p class="section-desc">
+            Apoiamos sua liderança técnica com squads especializadas e arquiteturas robustas
+            para acelerar entregas sem criar débitos técnicos.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3>Transformação Digital & Automação</h3>
+            <p>
+              Mapeamento de rotinas operacionais e desenvolvimento de sistemas integrados para
+              eliminar planilhas dispersas e processos manuais lentos.
+            </p>
+            <ul class="service-deliverables">
+              <li>Digitalização de fluxos de aprovação</li>
+              <li>Integração entre sistemas via APIs REST</li>
+              <li>Painéis operacionais de gestão em tempo real</li>
+            </ul>
+          </article>
+
+          <!-- Service 2 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <path d="M11 8v6"></path>
+                <path d="M8 11h6"></path>
+              </svg>
+            </div>
+            <h3>Busca Inteligente em Documentos</h3>
+            <p>
+              Sistemas de busca semântica (RAG) que encontram informações e cláusulas exatas
+              em bases volumosas de contratos, pareceres e arquivos técnicos.
+            </p>
+            <ul class="service-deliverables">
+              <li>Processamento de PDFs e relatórios técnicos</li>
+              <li>Citações diretas com página e fonte original</li>
+              <li>Banco vetorial PostgreSQL com extensão pgvector</li>
+            </ul>
+          </article>
+
+          <!-- Service 3 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v4"></path>
+                <path d="M12 18v4"></path>
+                <path d="M4.93 4.93l2.83 2.83"></path>
+                <path d="M16.24 16.24l2.83 2.83"></path>
+                <path d="M2 12h4"></path>
+                <path d="M18 12h4"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <h3>Inteligência Artificial Aplicada</h3>
+            <p>
+              Implementação de pipelines de IA para sumarização, categorização automática
+              e apoio à tomada de decisão sem dependência de nuvens proprietárias fechadas.
+            </p>
+            <ul class="service-deliverables">
+              <li>Modelos abertos com inferência local ou nuvem soberana</li>
+              <li>Assistentes especializados para equipes de análise</li>
+              <li>Métricas rigorosas de precisão e auditabilidade</li>
+            </ul>
+          </article>
+
+          <!-- Service 4 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Plataformas Colaborativas & Intranets</h3>
+            <p>
+              Implantação de ferramentas modernas de comunicação assíncrona, gestão de tarefas
+              e acervos de conhecimento que mantêm as equipes alinhadas.
+            </p>
+            <ul class="service-deliverables">
+              <li>Controle granular de acessos e permissões</li>
+              <li>Integração com diretórios corporativos (LDAP/SSO)</li>
+              <li>Migração e estruturação de bases históricas</li>
+            </ul>
+          </article>
+
+          <!-- Service 5 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3>Infraestrutura Moderna & DevOps</h3>
+            <p>
+              Arquitetura de servidores Linux, conteinerização com Docker, observabilidade
+              e rotinas de contingência para garantir alta disponibilidade contínua.
+            </p>
+            <ul class="service-deliverables">
+              <li>Infraestrutura como Código (IaC) reprodutível</li>
+              <li>Rotinas automáticas de backup criptografado</li>
+              <li>Monitoramento proativo e telemetria de serviços</li>
+            </ul>
+          </article>
+
+          <!-- Service 6 -->
+          <article class="service-card">
+            <div class="service-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <h3>Consultoria e Arquitetura de TI</h3>
+            <p>
+              Diagnóstico técnico aprofundado para avaliar segurança, performance de banco de dados
+              e caminhos viáveis de modernização de sistemas legados.
+            </p>
+            <ul class="service-deliverables">
+              <li>Auditoria de código e vulnerabilidades</li>
+              <li>Plano estratégico de evolução tecnológica</li>
+              <li>Treinamento e capacitação de equipes internas</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process / Como Cooperamos -->
+    <section class="section process-section" id="metodo">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Disciplina de Execução</span>
+          <h2 class="section-title">Como estruturamos e entregamos seu projeto</h2>
+          <p class="section-desc">
+            Um fluxo de engenharia transparente, previsível e orientado a marcos operacionais tangíveis.
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-step">
+            <div class="step-number">Etapa 01</div>
+            <h3 class="step-title">Diagnóstico Técnico</h3>
+            <p class="step-desc">
+              Imersão profunda no ecossistema da sua organização para identificar fluxos manuais,
+              gargalos e requisitos de segurança.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">Etapa 02</div>
+            <h3 class="step-title">Arquitetura & PoC</h3>
+            <p class="step-desc">
+              Desenho da arquitetura em software livre e protótipo funcional para validação prévia
+              de viabilidade técnica e usabilidade.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">Etapa 03</div>
+            <h3 class="step-title">Sprints Quinzenais</h3>
+            <p class="step-desc">
+              Desenvolvimento iterativo no modelo Scrum com demonstrações periódicas de módulos
+              operacionais e homologação progressiva.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number">Etapa 04</div>
+            <h3 class="step-title">Deploy & Autonomia</h3>
+            <p class="step-desc">
+              Implantação em produção com observabilidade ativa, documentação técnica exaustiva
+              e capacitação da sua equipe para autonomia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Sobre a UpScrum</span>
+          <h2 class="section-title">Tecnologia aberta construída para resolver problemas reais</h2>
+          <p class="section-desc">
+            A UpScrum nasceu da convicção de que organizações não precisam ficar reféns de licenças
+            estrangeiras impeditivas para ter tecnologia de ponta. Combinamos o rigor do software livre,
+            a disciplina de processos ágeis e a vanguarda da inteligência artificial para entregar sistemas
+            que dão controle real aos seus donos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contato">
+      <div class="container contact-layout">
+        <div class="contact-info-panel">
+          <span class="section-eyebrow">Canal Direto</span>
+          <h2>Vamos construir uma solução técnica para o seu desafio?</h2>
+          <p>
+            Conte-nos sobre sua operação, demandas de documentos, frotas ou modernização de sistemas.
+            Nossa equipe técnica analisa seu cenário e agenda uma conversa técnica focada em soluções.
+          </p>
+
+          <div class="contact-points">
+            <div class="contact-point">
+              <div class="point-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="point-text">
+                <strong>Atendimento por e-mail</strong>
+                <span>contato@upscrum.com.br</span>
+              </div>
+            </div>
+
+            <div class="contact-point">
+              <div class="point-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="point-text">
+                <strong>Resposta ágil garantida</strong>
+                <span>Retorno detalhado em até 24 horas úteis</span>
+              </div>
+            </div>
+
+            <div class="contact-point">
+              <div class="point-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </div>
+              <div class="point-text">
+                <strong>Confidencialidade assegurada</strong>
+                <span>Disponibilidade para assinatura prévia de termo NDA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-box">
           <form class="contact-form" data-contact-form>
             <input type="hidden" name="subject" value="UpScrum Institucional" />
+
             <div class="form-row">
               <div class="form-field">
-                <label for="contact-name">Nome</label>
-                <input id="contact-name" type="text" name="name" autocomplete="name" required />
+                <label for="contact-name">Nome completo</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  autocomplete="name"
+                  placeholder="Seu nome"
+                  required
+                />
               </div>
+
               <div class="form-field">
-                <label for="contact-email">E-mail</label>
-                <input id="contact-email" type="email" name="email" autocomplete="email" required />
+                <label for="contact-email">E-mail corporativo</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="voce@organizacao.com.br"
+                  required
+                />
               </div>
             </div>
+
             <div class="form-field">
-              <label for="contact-whatsapp">WhatsApp</label>
-              <input id="contact-whatsapp" type="tel" name="whatsapp" autocomplete="tel" />
+              <label for="contact-whatsapp">WhatsApp ou telefone de contato</label>
+              <input
+                id="contact-whatsapp"
+                type="tel"
+                name="whatsapp"
+                autocomplete="tel"
+                placeholder="(00) 00000-0000"
+              />
             </div>
+
             <div class="form-field">
-              <label for="contact-message">Mensagem</label>
-              <textarea id="contact-message" name="message" required></textarea>
+              <label for="contact-message">Conte-nos sobre o projeto ou necessidade técnica</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="Descreva brevemente o contexto da sua organização, sistemas atuais ou objetivo principal..."
+                required
+              ></textarea>
             </div>
-            <button class="btn btn-primary btn-submit" type="submit">Enviar mensagem</button>
-            <p class="form-note">Resposta pelo e-mail contato@upscrum.com.br.</p>
+
+            <button class="btn btn-primary btn-submit" type="submit">
+              Enviar mensagem para a equipe
+            </button>
+
+            <p class="form-disclaimer">
+              Seus dados serão utilizados exclusivamente para contato técnico comercial da UpScrum.
+            </p>
+
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
           </form>
         </div>
@@ -546,11 +1836,101 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
-      © 2026 UpScrum. Todos os direitos reservados.
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </span>
+            <span>UpScrum</span>
+          </div>
+          <p class="footer-desc">
+            Consultoria e engenharia de software livre, inteligência artificial aplicada em documentos
+            e plataformas de missão crítica. Soberania tecnológica e foco em resultados operacionais.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Soluções Especializadas</div>
+          <ul class="footer-links">
+            <li><a href="plataforma-adocoes.html">Gestão de Adoções de Pets</a></li>
+            <li><a href="rastreamento.html">Rastreamento de Veículos & Ativos</a></li>
+            <li><a href="#servicos">Busca Inteligente em Documentos</a></li>
+            <li><a href="#servicos">Automação de Processos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navegação</div>
+          <ul class="footer-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#pilares">Por que a UpScrum</a></li>
+            <li><a href="#servicos">Serviços Técnicos</a></li>
+            <li><a href="#metodo">Metodologia Ágil</a></li>
+            <li><a href="#contato">Fale Conosco</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 UpScrum. Todos os direitos reservados.</div>
+        <div>Soberania digital e código auditável para organizações de impacto.</div>
+      </div>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Interactive Terminal Tab Switcher
+    function selectConsoleTab(tabKey) {
+      // Deactivate all tabs
+      document.querySelectorAll('.console-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      // Deactivate all panels
+      document.querySelectorAll('.console-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+
+      // Activate selected
+      const activeBtn = document.getElementById('tab-' + tabKey);
+      const activePanel = document.getElementById('panel-' + tabKey);
+
+      if (activeBtn && activePanel) {
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-selected', 'true');
+        activePanel.classList.add('active');
+      }
+    }
+
+    // Mobile Drawer Navigation
+    const mobileMenuBtn = document.getElementById('mobileMenuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isVisible = mobileDrawer.style.display === 'block';
+        mobileDrawer.style.display = isVisible ? 'none' : 'block';
+        mobileMenuBtn.setAttribute('aria-expanded', String(!isVisible));
+      });
+    }
+
+    function closeMobileMenu() {
+      if (mobileDrawer) {
+        mobileDrawer.style.display = 'none';
+        if (mobileMenuBtn) {
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }
+  </script>
+  <!-- Form Submission Handler -->
   <script src="contact.js"></script>
 </body>
 </html>
