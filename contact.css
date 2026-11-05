@@ -1,0 +1,37 @@
+[data-contact-form] .form-field {
+  min-width: 0;
+}
+
+[data-contact-form] input,
+[data-contact-form] textarea {
+  font-size: 1rem;
+}
+
+[data-contact-form] :is(.form-status, .form-note, .form-disclaimer) {
+  overflow-wrap: anywhere;
+}
+
+[data-contact-form] :is(.form-status, .form-note, .form-disclaimer) a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+[data-contact-form] a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.company-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.company-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

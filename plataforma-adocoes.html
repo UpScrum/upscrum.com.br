@@ -67,6 +67,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 0;
+      gap: 16px;
+      position: relative;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -80,7 +83,7 @@
       color: var(--accent);
     }
 
-    .nav a {
+    .nav-links a {
       color: var(--ink);
       text-decoration: none;
       margin-left: 18px;
@@ -88,8 +91,94 @@
       font-weight: 600;
     }
 
-    .nav a:hover {
+    .nav-links a:hover {
       opacity: 1;
+    }
+
+    a.brand {
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .nav-toggle {
+      display: none;
+      min-height: 44px;
+      padding: 8px 14px;
+      font: inherit;
+      font-weight: 700;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .nav-toggle:hover,
+    .nav-toggle[aria-expanded="true"] {
+      background: var(--bg-soft);
+    }
+
+    .nav :is(a, button):focus-visible {
+      outline: 2px solid var(--accent-dark);
+      outline-offset: 4px;
+    }
+
+    .nav [hidden] {
+      display: none;
+    }
+
+    main section[id] {
+      scroll-margin-top: 104px;
+    }
+
+    @media (max-width: 780px) {
+      .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .nav-links {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .nav-links a {
+        margin-left: 0;
+        padding: 10px 14px;
+        opacity: 1;
+      }
+
+      .nav-links a:hover {
+        background: var(--bg-soft);
+      }
+
+      .nav[data-enhanced] .nav-links {
+        position: absolute;
+        top: 100%;
+        inset-inline: 0;
+        padding: 8px;
+        max-height: calc(100dvh - 100px);
+        overflow-y: auto;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
     }
 
     .hero {
@@ -146,7 +235,7 @@
     }
 
     .btn-primary {
-      background: var(--accent);
+      background: var(--accent-dark);
       color: #fff7f2;
       box-shadow: 0 10px 24px rgba(216, 87, 42, 0.28);
     }
@@ -187,7 +276,7 @@
       background: rgba(15, 118, 110, 0.12);
     }
 
-    .hero-card h3 {
+    .hero-card h2 {
       margin-bottom: 14px;
       font-family: Archivo, "Segoe UI", sans-serif;
       font-size: 1.22rem;
@@ -515,10 +604,6 @@
         font-size: 1.7rem;
       }
 
-      .nav-links {
-        display: none;
-      }
-
       .hero {
         padding-top: 64px;
       }
@@ -532,12 +617,16 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="accessibility.css" />
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header>
     <div class="container nav">
-      <div class="brand">Up<span>Scrum</span></div>
-      <nav class="nav-links">
+      <a class="brand" href="index.html" aria-label="UpScrum — página inicial">Up<span>Scrum</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="adoptions-navigation" hidden>Menu</button>
+      <nav class="nav-links" id="adoptions-navigation" aria-label="Navegação da plataforma de adoções">
         <a href="#sobre">Plataforma</a>
         <a href="#recursos">Recursos</a>
         <a href="#portal">Portal de Adoção</a>
@@ -546,7 +635,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
     <section class="hero">
       <div class="container hero-grid">
         <div class="reveal">
@@ -564,7 +653,7 @@
         </div>
 
         <aside class="hero-card reveal delay-1">
-          <h3>Visão operacional em um só painel</h3>
+          <h2>Visão operacional em um só painel</h2>
           <ul>
             <li>Cadastro de organizações com equipes e unidades</li>
             <li>Cadastro completo de PETs com histórico e status</li>
@@ -713,7 +802,7 @@
               </div>
             </div>
             <div class="form-field">
-              <label for="adocoes-contact-whatsapp">WhatsApp</label>
+              <label for="adocoes-contact-whatsapp">WhatsApp (opcional)</label>
               <input id="adocoes-contact-whatsapp" type="tel" name="whatsapp" autocomplete="tel" />
             </div>
             <div class="form-field">
@@ -721,7 +810,7 @@
               <textarea id="adocoes-contact-message" name="message" required></textarea>
             </div>
             <button class="btn btn-primary btn-submit" type="submit">Solicitar demonstração</button>
-            <p class="form-note">Resposta pelo e-mail contato@upscrum.com.br.</p>
+            <p class="form-note">Seus dados serão utilizados exclusivamente para contato técnico comercial da UpScrum. Se preferir, escreva para <a href="mailto:contato@upscrum.com.br">contato@upscrum.com.br</a>.</p>
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
           </form>
         </div>
@@ -732,8 +821,65 @@
   <footer>
     <div class="container">
       © 2026 UpScrum. Plataforma de gestão de adoções de pets.
+      <p><a class="company-link" href="index.html">Conheça a UpScrum e outras soluções</a></p>
     </div>
   </footer>
+  <script>
+    const navigation = document.querySelector('.nav');
+    const navigationToggle = navigation.querySelector('.nav-toggle');
+    const navigationLinks = navigation.querySelector('.nav-links');
+    const mobileNavigation = window.matchMedia('(max-width: 780px)');
+
+    function setNavigationOpen(open) {
+      navigationToggle.setAttribute('aria-expanded', String(open));
+      navigationToggle.textContent = open ? 'Fechar menu' : 'Menu';
+      navigationLinks.hidden = mobileNavigation.matches && !open;
+    }
+
+    function syncNavigation() {
+      if (!mobileNavigation.matches && document.activeElement === navigationToggle) {
+        navigation.querySelector('.brand').focus();
+      } else if (mobileNavigation.matches && navigationLinks.contains(document.activeElement)) {
+        navigationToggle.focus();
+      }
+      setNavigationOpen(false);
+    }
+
+    navigation.dataset.enhanced = '';
+    navigationToggle.hidden = false;
+    syncNavigation();
+    mobileNavigation.addEventListener('change', syncNavigation);
+
+    navigationToggle.addEventListener('click', () => {
+      setNavigationOpen(navigationToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    navigationLinks.addEventListener('click', (event) => {
+      const link = event.target.closest('a');
+      if (!link || !mobileNavigation.matches) return;
+      setNavigationOpen(false);
+      const section = document.querySelector(link.getAttribute('href'));
+      if (section) {
+        section.setAttribute('tabindex', '-1');
+        section.focus({ preventScroll: true });
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && navigationToggle.getAttribute('aria-expanded') === 'true') {
+        setNavigationOpen(false);
+        navigationToggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!navigation.contains(event.target) && navigationToggle.getAttribute('aria-expanded') === 'true') {
+        const focusWasInMenu = navigationLinks.contains(document.activeElement);
+        setNavigationOpen(false);
+        if (focusWasInMenu) navigationToggle.focus();
+      }
+    });
+  </script>
   <script src="contact.js"></script>
 </body>
 </html>
