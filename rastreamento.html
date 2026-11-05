@@ -259,6 +259,12 @@
 
     .map-card {
       position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      padding: 18px;
+      align-items: start;
+      align-content: space-between;
       min-height: 300px;
       border: 1px solid rgba(23, 32, 51, 0.12);
       border-radius: 16px;
@@ -313,7 +319,9 @@
     .asset-card,
     .alert-card,
     .summary-card {
-      position: absolute;
+      position: relative;
+      min-width: 0;
+      overflow-wrap: anywhere;
       background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(23, 32, 51, 0.12);
       border-radius: 14px;
@@ -322,21 +330,18 @@
     }
 
     .asset-card {
-      left: 18px;
-      top: 18px;
-      width: 178px;
+      grid-column: 1;
+      grid-row: 1 / span 2;
     }
 
     .alert-card {
-      right: 18px;
-      bottom: 18px;
-      width: 192px;
+      grid-column: 2;
+      grid-row: 2;
     }
 
     .summary-card {
-      right: 18px;
-      top: 18px;
-      width: 138px;
+      grid-column: 2;
+      grid-row: 1;
     }
 
     .mini-label {
@@ -356,7 +361,7 @@
 
     .mini-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 3.5rem), 1fr));
       gap: 8px;
       margin-top: 10px;
     }
@@ -743,16 +748,6 @@
         display: none;
       }
 
-      .asset-card,
-      .alert-card {
-        width: min(178px, calc(100% - 32px));
-      }
-
-      .alert-card {
-        right: 14px;
-        bottom: 14px;
-      }
-
       .contact-box {
         padding: 24px;
       }
@@ -804,12 +799,15 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="accessibility.css" />
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <!-- PRODUCT_NAME centralizado para uso pelo script: UpScrum Tracking -->
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html">Up<span>Scrum</span></a>
+      <a class="brand" href="index.html" aria-label="UpScrum — página inicial">Up<span>Scrum</span></a>
       <nav class="nav-links" aria-label="Navegação principal">
         <a href="#plataforma">Plataforma</a>
         <a href="#recursos">Recursos</a>
@@ -820,7 +818,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
     <section class="hero" id="plataforma">
       <div class="container hero-grid">
         <div>
@@ -1182,7 +1180,7 @@
               </div>
             </div>
             <div class="form-field">
-              <label for="tracking-contact-whatsapp">WhatsApp</label>
+              <label for="tracking-contact-whatsapp">WhatsApp (opcional)</label>
               <input id="tracking-contact-whatsapp" type="tel" name="whatsapp" autocomplete="tel" />
             </div>
             <div class="form-field">
@@ -1190,7 +1188,7 @@
               <textarea id="tracking-contact-message" name="message" required></textarea>
             </div>
             <button class="btn btn-primary btn-submit" type="submit">Solicitar demonstração</button>
-            <p class="form-note">Resposta pelo e-mail contato@upscrum.com.br.</p>
+            <p class="form-note">Seus dados serão utilizados exclusivamente para contato técnico comercial da UpScrum. Se preferir, escreva para <a href="mailto:contato@upscrum.com.br">contato@upscrum.com.br</a>.</p>
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
           </form>
         </div>
@@ -1201,6 +1199,7 @@
   <footer>
     <div class="container">
       © 2026 UpScrum. Solução de rastreamento e monitoramento de ativos.
+      <p><a class="company-link" href="index.html">Conheça a UpScrum e outras soluções</a></p>
     </div>
   </footer>
 

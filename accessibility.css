@@ -1,0 +1,54 @@
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  padding: 12px 18px;
+  background: #ffffff;
+  color: #172033;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+main {
+  scroll-margin-top: max(100px, 6rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .pulse-dot,
+  .console-panel {
+    animation: none;
+  }
+
+  .btn,
+  .btn-header,
+  .service-card,
+  .console-tab-btn,
+  .form-field input,
+  .form-field textarea {
+    transition: none;
+  }
+
+  .btn:hover,
+  .btn-header:hover,
+  .service-card:hover {
+    transform: none;
+  }
+}

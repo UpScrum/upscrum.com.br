@@ -130,7 +130,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      min-height: 72px;
+      padding-block: 12px;
       gap: 20px;
     }
 
@@ -208,6 +209,27 @@
       padding: 8px;
       cursor: pointer;
       color: var(--ink-primary);
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .mobile-drawer {
+      display: none;
+      background: var(--surface-white);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 18px 20px;
+      max-height: calc(100dvh - 72px);
+      overflow-y: auto;
+    }
+
+    .mobile-drawer .nav-link {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    main section[id] {
+      scroll-margin-top: max(100px, 6rem);
     }
 
     /* Buttons */
@@ -368,6 +390,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .console-window-controls {
@@ -406,6 +429,14 @@
       padding: 6px 8px 0;
       gap: 4px;
       overflow-x: auto;
+    }
+
+    .console-demo-note {
+      padding: 14px 18px;
+      color: var(--ink-inverse);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border-dark);
     }
 
     .console-tab-btn {
@@ -510,6 +541,8 @@
     .console-footer-note {
       margin-top: 18px;
       display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
       align-items: center;
       justify-content: space-between;
       font-size: 0.75rem;
@@ -777,6 +810,24 @@
       flex-grow: 1;
     }
 
+    .service-details summary {
+      padding: 10px 0;
+      min-height: 44px;
+      color: var(--brand-blue);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .service-details summary:hover {
+      color: var(--brand-blue-hover);
+    }
+
+    .service-details summary:focus-visible {
+      outline: 2px solid var(--brand-blue);
+      outline-offset: 3px;
+    }
+
     .service-deliverables {
       list-style: none;
       border-top: 1px solid var(--border-subtle);
@@ -923,9 +974,23 @@
       margin-bottom: 2px;
     }
 
-    .point-text span {
+    .point-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .point-text :is(span, a) {
       font-size: 0.88rem;
       color: var(--ink-secondary);
+    }
+
+    .point-text a {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .contact-layout > * {
+      min-width: 0;
     }
 
     .contact-form-box {
@@ -1085,7 +1150,7 @@
       flex-wrap: wrap;
       gap: 16px;
       font-size: 0.85rem;
-      color: #64748b;
+      color: var(--ink-inverse-muted);
     }
 
     /* Responsive Breakpoints */
@@ -1145,17 +1210,12 @@
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
   </style>
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="accessibility.css" />
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <!-- Header / Navigation -->
   <header>
     <div class="container nav">
@@ -1180,7 +1240,7 @@
         <a class="btn-header" href="#contato">Fale com a equipe</a>
       </div>
 
-      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+      <button class="mobile-menu-btn" id="mobileMenuToggle" type="button" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobileDrawer">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -1190,7 +1250,7 @@
     </div>
 
     <!-- Mobile Drawer Nav -->
-    <div id="mobileDrawer" style="display: none; background: #ffffff; border-bottom: 1px solid var(--border-subtle); padding: 18px 20px;">
+    <div id="mobileDrawer" class="mobile-drawer">
       <nav style="display: grid; gap: 14px;" aria-label="Menu Mobile">
         <a class="nav-link" href="#solucoes" onclick="closeMobileMenu()">Soluções</a>
         <a class="nav-link" href="#pilares" onclick="closeMobileMenu()">Soberania</a>
@@ -1202,7 +1262,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo" tabindex="-1">
     <!-- Hero Section -->
     <section class="hero" id="inicio">
       <div class="container hero-grid">
@@ -1211,15 +1271,15 @@
             <span class="pulse-dot" aria-hidden="true"></span>
             Software livre, IA aplicada e infraestrutura sob medida
           </div>
-          <h1>Soluções digitais sólidas, com código aberto e soberania operacional.</h1>
+          <h1>Automatize processos e consulte documentos com software livre.</h1>
           <p class="hero-lead">
-            Desenvolvemos sistemas corporativos, fluxos de inteligência artificial em documentos
-            e plataformas de missão crítica. Sua organização detém o código, os dados e a infraestrutura,
+            Desenvolvemos sistemas sob medida para organizar rotinas, encontrar informações em documentos
+            e acompanhar sua operação. Sua organização detém o código, os dados e a infraestrutura,
             sem aprisionamento tecnológico.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="#contato">Fale com nossa equipe</a>
-            <a class="btn btn-secondary" href="#solucoes">Conheça soluções em produção</a>
+            <a class="btn btn-secondary" href="#solucoes">Conheça nossas soluções</a>
           </div>
           <div class="hero-trust">
             <div class="trust-item">
@@ -1244,22 +1304,25 @@
         </div>
 
         <!-- Interactive Architecture & Telemetry Console -->
-        <aside class="system-console" aria-label="Console Operacional da UpScrum">
+        <aside class="system-console" aria-label="Demonstração ilustrativa das soluções UpScrum" aria-describedby="console-demo-note">
           <div class="console-header">
             <div class="console-window-controls" aria-hidden="true">
               <div class="console-dot"></div>
               <div class="console-dot"></div>
               <div class="console-dot"></div>
             </div>
-            <div class="console-title">upscrum-core // runtime</div>
-            <div class="console-status-pill">ativo</div>
+            <div class="console-title">upscrum // demonstração</div>
+            <div class="console-status-pill">exemplo</div>
           </div>
+
+          <p class="console-demo-note" id="console-demo-note">Exemplo interativo com dados fictícios. Os números não representam resultados de clientes.</p>
 
           <div class="console-tabs" role="tablist" aria-label="Módulos da Plataforma">
             <button
               class="console-tab-btn active"
               role="tab"
               aria-selected="true"
+              tabindex="0"
               aria-controls="panel-ai"
               id="tab-ai"
               onclick="selectConsoleTab('ai')"
@@ -1270,6 +1333,7 @@
               class="console-tab-btn"
               role="tab"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="panel-iot"
               id="tab-iot"
               onclick="selectConsoleTab('iot')"
@@ -1280,6 +1344,7 @@
               class="console-tab-btn"
               role="tab"
               aria-selected="false"
+              tabindex="-1"
               aria-controls="panel-adoptions"
               id="tab-adoptions"
               onclick="selectConsoleTab('adoptions')"
@@ -1290,7 +1355,7 @@
 
           <div class="console-body">
             <!-- Panel 1: AI & RAG -->
-            <div class="console-panel active" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai">
+            <div class="console-panel active" id="panel-ai" role="tabpanel" tabindex="0" aria-labelledby="tab-ai">
               <div class="console-meta-grid">
                 <div class="console-meta-box">
                   <div class="console-meta-label">Acervo Indexado</div>
@@ -1310,7 +1375,7 @@
             </div>
 
             <!-- Panel 2: Telemetry & IoT -->
-            <div class="console-panel" id="panel-iot" role="tabpanel" aria-labelledby="tab-iot">
+            <div class="console-panel" id="panel-iot" role="tabpanel" tabindex="0" aria-labelledby="tab-iot">
               <div class="console-meta-grid">
                 <div class="console-meta-box">
                   <div class="console-meta-label">Dispositivos Ativos</div>
@@ -1330,7 +1395,7 @@
             </div>
 
             <!-- Panel 3: Adoptions -->
-            <div class="console-panel" id="panel-adoptions" role="tabpanel" aria-labelledby="tab-adoptions">
+            <div class="console-panel" id="panel-adoptions" role="tabpanel" tabindex="0" aria-labelledby="tab-adoptions">
               <div class="console-meta-grid">
                 <div class="console-meta-box">
                   <div class="console-meta-label">Adoções Processadas</div>
@@ -1351,7 +1416,7 @@
 
             <div class="console-footer-note">
               <span>Arquitetura modular em software livre</span>
-              <span>v3.4.1-prod</span>
+              <span>Dados fictícios</span>
             </div>
           </div>
         </aside>
@@ -1509,8 +1574,8 @@
           <span class="section-eyebrow">Capacidades Técnicas</span>
           <h2 class="section-title">Serviços de engenharia e consultoria</h2>
           <p class="section-desc">
-            Apoiamos sua liderança técnica com squads especializadas e arquiteturas robustas
-            para acelerar entregas sem criar débitos técnicos.
+            Encontre apoio para automatizar rotinas, consultar documentos, conectar equipes
+            e manter seus sistemas. Abra os detalhes de cada serviço para conhecer as entregas técnicas.
           </p>
         </div>
 
@@ -1523,16 +1588,19 @@
                 <polyline points="8 6 2 12 8 18"></polyline>
               </svg>
             </div>
-            <h3>Transformação Digital & Automação</h3>
+            <h3>Automatize rotinas e conecte sistemas</h3>
             <p>
               Mapeamento de rotinas operacionais e desenvolvimento de sistemas integrados para
               eliminar planilhas dispersas e processos manuais lentos.
             </p>
-            <ul class="service-deliverables">
-              <li>Digitalização de fluxos de aprovação</li>
-              <li>Integração entre sistemas via APIs REST</li>
-              <li>Painéis operacionais de gestão em tempo real</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Digitalização de fluxos de aprovação</li>
+                <li>Integração entre sistemas via APIs REST</li>
+                <li>Painéis operacionais de gestão em tempo real</li>
+              </ul>
+            </details>
           </article>
 
           <!-- Service 2 -->
@@ -1545,16 +1613,19 @@
                 <path d="M8 11h6"></path>
               </svg>
             </div>
-            <h3>Busca Inteligente em Documentos</h3>
+            <h3>Encontre informações nos seus documentos</h3>
             <p>
-              Sistemas de busca semântica (RAG) que encontram informações e cláusulas exatas
-              em bases volumosas de contratos, pareceres e arquivos técnicos.
+              Busca em contratos, pareceres e arquivos técnicos com respostas
+              acompanhadas de citações da fonte original.
             </p>
-            <ul class="service-deliverables">
-              <li>Processamento de PDFs e relatórios técnicos</li>
-              <li>Citações diretas com página e fonte original</li>
-              <li>Banco vetorial PostgreSQL com extensão pgvector</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Processamento de PDFs e relatórios técnicos</li>
+                <li>Citações diretas com página e fonte original</li>
+                <li>Banco vetorial PostgreSQL com extensão pgvector</li>
+              </ul>
+            </details>
           </article>
 
           <!-- Service 3 -->
@@ -1570,16 +1641,19 @@
                 <circle cx="12" cy="12" r="3"></circle>
               </svg>
             </div>
-            <h3>Inteligência Artificial Aplicada</h3>
+            <h3>Use IA na análise de informações</h3>
             <p>
-              Implementação de pipelines de IA para sumarização, categorização automática
-              e apoio à tomada de decisão sem dependência de nuvens proprietárias fechadas.
+              Resumos, classificação de documentos e apoio à análise com IA,
+              sem dependência de nuvens proprietárias fechadas.
             </p>
-            <ul class="service-deliverables">
-              <li>Modelos abertos com inferência local ou nuvem soberana</li>
-              <li>Assistentes especializados para equipes de análise</li>
-              <li>Métricas rigorosas de precisão e auditabilidade</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Modelos abertos com inferência local ou nuvem soberana</li>
+                <li>Assistentes especializados para equipes de análise</li>
+                <li>Métricas rigorosas de precisão e auditabilidade</li>
+              </ul>
+            </details>
           </article>
 
           <!-- Service 4 -->
@@ -1592,16 +1666,19 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </div>
-            <h3>Plataformas Colaborativas & Intranets</h3>
+            <h3>Organize o trabalho da sua equipe</h3>
             <p>
-              Implantação de ferramentas modernas de comunicação assíncrona, gestão de tarefas
-              e acervos de conhecimento que mantêm as equipes alinhadas.
+              Ferramentas para comunicação, gestão de tarefas e organização
+              do conhecimento da sua equipe.
             </p>
-            <ul class="service-deliverables">
-              <li>Controle granular de acessos e permissões</li>
-              <li>Integração com diretórios corporativos (LDAP/SSO)</li>
-              <li>Migração e estruturação de bases históricas</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Controle granular de acessos e permissões</li>
+                <li>Integração com diretórios corporativos (LDAP/SSO)</li>
+                <li>Migração e estruturação de bases históricas</li>
+              </ul>
+            </details>
           </article>
 
           <!-- Service 5 -->
@@ -1614,16 +1691,19 @@
                 <line x1="6" y1="18" x2="6.01" y2="18"></line>
               </svg>
             </div>
-            <h3>Infraestrutura Moderna & DevOps</h3>
+            <h3>Mantenha sua infraestrutura em operação</h3>
             <p>
               Arquitetura de servidores Linux, conteinerização com Docker, observabilidade
               e rotinas de contingência para garantir alta disponibilidade contínua.
             </p>
-            <ul class="service-deliverables">
-              <li>Infraestrutura como Código (IaC) reprodutível</li>
-              <li>Rotinas automáticas de backup criptografado</li>
-              <li>Monitoramento proativo e telemetria de serviços</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Infraestrutura como Código (IaC) reprodutível</li>
+                <li>Rotinas automáticas de backup criptografado</li>
+                <li>Monitoramento proativo e telemetria de serviços</li>
+              </ul>
+            </details>
           </article>
 
           <!-- Service 6 -->
@@ -1635,16 +1715,19 @@
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
             </div>
-            <h3>Consultoria e Arquitetura de TI</h3>
+            <h3>Planeje a evolução dos seus sistemas</h3>
             <p>
               Diagnóstico técnico aprofundado para avaliar segurança, performance de banco de dados
               e caminhos viáveis de modernização de sistemas legados.
             </p>
-            <ul class="service-deliverables">
-              <li>Auditoria de código e vulnerabilidades</li>
-              <li>Plano estratégico de evolução tecnológica</li>
-              <li>Treinamento e capacitação de equipes internas</li>
-            </ul>
+            <details class="service-details">
+              <summary>Ver entregas técnicas</summary>
+              <ul class="service-deliverables">
+                <li>Auditoria de código e vulnerabilidades</li>
+                <li>Plano estratégico de evolução tecnológica</li>
+                <li>Treinamento e capacitação de equipes internas</li>
+              </ul>
+            </details>
           </article>
         </div>
       </div>
@@ -1738,7 +1821,7 @@
               </div>
               <div class="point-text">
                 <strong>Atendimento por e-mail</strong>
-                <span>contato@upscrum.com.br</span>
+                <a href="mailto:contato@upscrum.com.br">contato@upscrum.com.br</a>
               </div>
             </div>
 
@@ -1788,20 +1871,20 @@
               </div>
 
               <div class="form-field">
-                <label for="contact-email">E-mail corporativo</label>
+                <label for="contact-email">E-mail</label>
                 <input
                   id="contact-email"
                   type="email"
                   name="email"
                   autocomplete="email"
-                  placeholder="voce@organizacao.com.br"
+                  placeholder="voce@exemplo.com.br"
                   required
                 />
               </div>
             </div>
 
             <div class="form-field">
-              <label for="contact-whatsapp">WhatsApp ou telefone de contato</label>
+              <label for="contact-whatsapp">WhatsApp ou telefone (opcional)</label>
               <input
                 id="contact-whatsapp"
                 type="tel"
@@ -1826,7 +1909,7 @@
             </button>
 
             <p class="form-disclaimer">
-              Seus dados serão utilizados exclusivamente para contato técnico comercial da UpScrum.
+              Seus dados serão utilizados exclusivamente para contato técnico comercial da UpScrum. Se preferir, escreva para <a href="mailto:contato@upscrum.com.br">contato@upscrum.com.br</a>.
             </p>
 
             <div class="form-status" data-form-status role="status" aria-live="polite"></div>
@@ -1892,6 +1975,7 @@
       document.querySelectorAll('.console-tab-btn').forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-selected', 'false');
+        btn.tabIndex = -1;
       });
       // Deactivate all panels
       document.querySelectorAll('.console-panel').forEach(panel => {
@@ -1905,30 +1989,78 @@
       if (activeBtn && activePanel) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-selected', 'true');
+        activeBtn.tabIndex = 0;
         activePanel.classList.add('active');
       }
     }
+
+    const consoleTabs = Array.from(document.querySelectorAll('.console-tab-btn'));
+    document.querySelector('.console-tabs').addEventListener('keydown', (event) => {
+      const current = consoleTabs.indexOf(document.activeElement);
+      if (current < 0) return;
+      let next;
+      if (event.key === 'ArrowRight') next = (current + 1) % consoleTabs.length;
+      else if (event.key === 'ArrowLeft') next = (current + consoleTabs.length - 1) % consoleTabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = consoleTabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectConsoleTab(consoleTabs[next].id.replace('tab-', ''));
+      consoleTabs[next].focus();
+    });
 
     // Mobile Drawer Navigation
     const mobileMenuBtn = document.getElementById('mobileMenuToggle');
     const mobileDrawer = document.getElementById('mobileDrawer');
 
-    if (mobileMenuBtn && mobileDrawer) {
-      mobileMenuBtn.addEventListener('click', () => {
-        const isVisible = mobileDrawer.style.display === 'block';
-        mobileDrawer.style.display = isVisible ? 'none' : 'block';
-        mobileMenuBtn.setAttribute('aria-expanded', String(!isVisible));
-      });
+    const homeMobileViewport = window.matchMedia('(max-width: 768px)');
+
+    function setHomeMenuOpen(open) {
+      mobileDrawer.style.display = open ? 'block' : 'none';
+      mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenuBtn.setAttribute('aria-label', open ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
     }
 
+    mobileMenuBtn.addEventListener('click', () => {
+      setHomeMenuOpen(mobileMenuBtn.getAttribute('aria-expanded') !== 'true');
+    });
+
     function closeMobileMenu() {
-      if (mobileDrawer) {
-        mobileDrawer.style.display = 'none';
-        if (mobileMenuBtn) {
-          mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        }
-      }
+      setHomeMenuOpen(false);
     }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+        closeMobileMenu();
+        mobileMenuBtn.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('header') && mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+        const focusWasInMenu = mobileDrawer.contains(document.activeElement);
+        closeMobileMenu();
+        if (focusWasInMenu) mobileMenuBtn.focus();
+      }
+    });
+
+    mobileDrawer.addEventListener('click', (event) => {
+      const link = event.target.closest('a');
+      if (!link) return;
+      const section = document.querySelector(link.getAttribute('href'));
+      if (section) {
+        section.setAttribute('tabindex', '-1');
+        section.focus({ preventScroll: true });
+      }
+    });
+
+    homeMobileViewport.addEventListener('change', () => {
+      const focusWasInMenu = mobileDrawer.contains(document.activeElement);
+      closeMobileMenu();
+      if (!homeMobileViewport.matches && (focusWasInMenu || document.activeElement === mobileMenuBtn)) {
+        document.querySelector('.brand').focus();
+      }
+    });
   </script>
   <!-- Form Submission Handler -->
   <script src="contact.js"></script>
